@@ -1,85 +1,86 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+  import { RouterLink, RouterView } from 'vue-router'
+  import Heading from '@/components/BaseHeading.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div class="">
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <header class="row heading">
+      <Heading>
+        <template #logo>
+          <img alt="Vue logo" class="logo" src="@/assets/logo.svg"/>
+        </template>
+        <template #heading>JRK Verpflegungssystem</template>
+        <template #subheading>
+            <RouterLink to="/">Home</RouterLink>
+            <RouterLink to="/bestellung">Bestellung</RouterLink>
+            <RouterLink to="/kueche">Küche</RouterLink>
+            <RouterLink to="/ausgabe">Ausgabe</RouterLink>
+        </template>
+        <template #uhr>{{ uhrzeit }}</template>
+      </Heading>
+    </header>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+    <div class="row body">
+      <RouterView />
     </div>
-  </header>
-
-  <RouterView />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+<script lang="ts">
+  export default {
+    name: 'App',
+    data() {
+      return {
+        uhrzeit: timeFormat()
+      }
+    },
+    created: function () {
+      let th = this
+      setInterval(function () {
+        th.uhrzeit = timeFormat()
+      }, 1000)
+    }
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
+  function timeFormat() {
+    let date2 = new Date()
+    let h = date2.getHours() - 1
+    let m = date2.getMinutes()
+    let s = date2.getSeconds()
+    let hs = '' + h
+    let ms = '' + m
+    let ss = '' + s
+    if (h < 10) {
+      hs = '0' + h
+    }
+    if (m < 10) {
+      ms = '0' + m
+    }
+    if (s < 10) {
+      ss = '0' + s
+    }
+    let out
+    if (h !== 0) {
+      out = hs + ':' + ms + ':' + ss
+    } else {
+      out = ms + ':' + ss
+    }
+    return out
   }
+</script>
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+<style scoped lang="css">
+.logo{
+  height: 15vh;
+}
+.heading {
+  margin-top: 1vh;
+  height: 15vh;
+}
+.body {
+  margin-top: 2vh;
+  height: 70vh;
 }
 </style>
