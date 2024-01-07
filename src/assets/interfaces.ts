@@ -13,9 +13,9 @@ export interface OrderItem {
 }
 
 export interface Order {
-    id: number | null
-    time_in: Date
-    time_done: Date
-    time_gone: Date
+    id: number
+    time_in: string
+    time_done: string | null
+    time_gone: string | null
     order_items: OrderItem[]
 }
