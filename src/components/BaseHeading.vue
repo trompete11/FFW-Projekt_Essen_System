@@ -19,12 +19,10 @@
 .heading-logo {
   height: 100%;
   width: fit-content;
-  margin-left: 1em;
 }
 
 .heading-uhr {
   text-align: right;
   width: fit-content;
-  margin-right: 1em;
 }
 </style>
