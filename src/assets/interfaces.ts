@@ -5,6 +5,7 @@ export interface FoodItem {
 }
 
 export interface OrderItem {
+    id: number
     count: number
     price_sum: number
     comment: string | null
@@ -14,8 +15,8 @@ export interface OrderItem {
 
 export interface Order {
     id: number
-    time_in: string
-    time_done: string | null
-    time_gone: string | null
+    time_in: Date
+    time_done: Date | null
+    time_gone: Date | null
     order_items: OrderItem[]
 }
