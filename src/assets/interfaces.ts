@@ -7,6 +7,7 @@ export interface FoodItem {
 export interface OrderItem {
     id: number
     count: number
+    done: number
     price_sum: number
     comment: string | null
     item: FoodItem
