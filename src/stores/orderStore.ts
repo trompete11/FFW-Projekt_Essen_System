@@ -10,8 +10,8 @@ export const useOrderStore = defineStore('orderStore', () => {
   const getFilterdOrders = computed((filter: String) => orders.value) // @todo: implementation
 
   function addOrder(order_items:OrderItem[]) {
-    id.value++
     orders.value.push({id: id.value, time_in: new Date(), time_done: null, time_gone: null, order_items})
+    id.value++
     return id;
   }
 
