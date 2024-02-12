@@ -1,9 +1,18 @@
 <template>
-    <div id="order">
-        <input type="checkbox">
-        <p>ID</p>
-        <p>Bestellung</p>
-        <p>Timer</p>
+    <div class="order">
+        <div class="checkbox">
+            <input type="checkbox">
+        </div>
+
+        <div class="order-details">
+            <span>ID</span><br />
+            <span>Bestellung</span><br />
+            <span>AA</span><br />
+            <span>SS</span><br />
+        </div>
+        <div class="timer">
+            <span>Timer</span>
+        </div>
     </div>
 </template>
 
@@ -12,7 +21,34 @@
 </script>
 
 <style scoped>
-#order {
-    border: 1px solid black
+.order {
+    display: flex;
+    border: 1px solid white;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 10px;
+    /* add background color */
+}
+
+.checkbox {
+    flex: 0 0 auto;
+    margin-right: 10px;
+}
+
+.order-details {
+    border: 1px solid green;
+    flex-grow: 1; /* use available space */
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    font-size: 32px;
+}
+
+.timer {
+    border: 1px solid white;
+    text-align: right; 
+    font-size: 48px;
+    color: red;
 }
 </style>
