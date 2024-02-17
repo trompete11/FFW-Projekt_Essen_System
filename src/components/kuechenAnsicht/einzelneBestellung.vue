@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-
+    defineProps(['order']);
 </script>
 
 <style scoped>

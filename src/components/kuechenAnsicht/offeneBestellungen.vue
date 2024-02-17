@@ -2,18 +2,17 @@
     <div>
         <h2>Offene Bestellungen</h2>
     </div>
-    <div class="order-container">
-        <EinzelBestellung />
-        <EinzelBestellung />
-        <EinzelBestellung />
-        <EinzelBestellung />
-        <EinzelBestellung />
-        <EinzelBestellung />
+    <div class="order-container" v-for="order in orders" :key="order.id">
+        <Einzelbestellung order="order" />
     </div>
 </template>
 
 <script setup lang="ts">
+    import { useOrderStore } from '@/stores/orderStore';
     import EinzelBestellung from '@/components/kuechenAnsicht/einzelneBestellung.vue';
+
+    const orderStore = useOrderStore();
+    const orders = orderStore.getOrders;
 </script>
 
 <style scoped>
