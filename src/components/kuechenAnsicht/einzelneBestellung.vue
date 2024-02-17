@@ -32,8 +32,10 @@
 }
 
 .checkbox {
+    transform: scale(2.0);
     flex: 0 0 auto;
-    margin-right: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
 .order-details {
@@ -41,7 +43,8 @@
     flex-grow: 1; /* use available space */
     display: flex;
     flex-direction: column;
-    margin: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
     font-size: 32px;
 }
 
