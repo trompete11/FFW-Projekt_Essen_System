@@ -17,7 +17,11 @@
 </template>
 
 <script setup lang="ts">
-    defineProps(['order']);
+    import { type OrderItem } from '@/assets/interfaces';
+    import { defineProps } from 'vue';
+    const props = defineProps<{
+        orders: OrderItem[];
+    }>();
 </script>
 
 <style scoped>
