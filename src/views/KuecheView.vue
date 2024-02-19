@@ -21,9 +21,10 @@
   import SummeGerichte from '@/components/kuechenAnsicht/summeGerichte.vue';
   import { useOrderStore } from '@/stores/orderStore';
   import { type Order, type OrderItem, type FoodItem } from '@/assets/interfaces';
+  import { ref } from 'vue';
 
   const orderStore = useOrderStore();
-  const orders = orderStore.getOrders;
+  const orders = ref(orderStore.getOrders);
 
   const addData = () => {
     const exampleOrderItem1: OrderItem = {

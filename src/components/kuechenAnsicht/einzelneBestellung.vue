@@ -5,7 +5,8 @@
         </div>
 
         <div class="order-details">
-            <span>ID</span><br />
+            <span>ID {{ ords[0].count }}</span><br />
+            <span>ID {{ ords[1].count }}</span>
             <span>Bestellung</span><br />
             <span>AA</span><br />
             <span>SS</span><br />
@@ -20,7 +21,7 @@
     import { type OrderItem } from '@/assets/interfaces';
     import { defineProps } from 'vue';
     const props = defineProps<{
-        orders: OrderItem[];
+        ords: OrderItem[];
     }>();
 </script>
 

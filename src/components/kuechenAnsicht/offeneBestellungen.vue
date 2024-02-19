@@ -2,8 +2,10 @@
     <div>
         <h2>Offene Bestellungen</h2>
     </div>
-    <div v-for="order in orders" :key="order.id">
-        <Einzelbestellung :order="order" />
+    <div id="order-container">
+        <div v-for="order in orders" :key="order.id">
+            <EinzelBestellung :ords="order.order_items"/>
+        </div>
     </div>
 </template>
 
@@ -21,9 +23,9 @@
 </script>
 
 <style scoped>
-    .order-container {
+    #order-container {
         max-height: 800px;
         overflow-y: auto;
-        border: 1px solid blue;
+        border: 1px solid red;
     }
 </style>
