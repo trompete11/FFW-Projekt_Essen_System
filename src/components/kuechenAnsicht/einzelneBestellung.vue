@@ -11,17 +11,38 @@
             </div>
         </div>
         <div class="timer">
-            <span>Timer</span>
+            <span v-if="seconds < 10">{{ minutes}}:0{{ seconds }}</span>
+            <span v-else>{{ minutes }}:{{ seconds }}</span>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
     import { type OrderItem } from '@/assets/interfaces';
-    import { defineProps } from 'vue';
+    import { ref, defineProps, onMounted } from 'vue';
+
+    // define property for input of orders
     const props = defineProps<{
         ords: OrderItem[];
     }>();
+
+    // variables for timer
+    const seconds = ref(0)
+    const minutes = ref(0)
+
+    const startTimer = (() => {
+        const interval = setInterval(() => {
+            seconds.value++
+            if(seconds.value == 60){
+                seconds.value = 0
+                minutes.value++
+            }
+        }, 1000)
+    })
+
+    onMounted(() => {
+        startTimer()
+    })
 </script>
 
 <style scoped>
