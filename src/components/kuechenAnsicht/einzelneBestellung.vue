@@ -5,11 +5,10 @@
         </div>
 
         <div class="order-details">
-            <span>ID {{ ords[0].count }}</span><br />
-            <span>ID {{ ords[1].count }}</span>
-            <span>Bestellung</span><br />
-            <span>AA</span><br />
-            <span>SS</span><br />
+            <div v-for="item in ords" :key="item.id">
+                <span>{{ item.count }}x {{ item.item.name }} <span v-for="extra in item.extras" :key="extra.id"> / {{ extra.name }}</span></span>
+                <span v-if="item.comment"> / Comment: {{ item.comment }}</span>
+            </div>
         </div>
         <div class="timer">
             <span>Timer</span>

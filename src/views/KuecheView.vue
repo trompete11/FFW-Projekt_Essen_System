@@ -32,20 +32,16 @@
       price_sum: 25.99,
       comment: "No onions",
       item: { id: 1, name: "Burger", price: 12.99 },
-      extras: [{ id: 2, name: "Cheese", price: 1.99 }]
+      extras: [{ id: 2, name: "Cheese", price: 1.99 }, { id: 3, name: "Chilli", price: 1.99 }]
     };
 
     const exampleOrderItem2: OrderItem = {
-      count: 1,
+      count: 3,
       price_sum: 8.49,
       comment: null,
-      item: { id: 3, name: "Salad", price: 8.49 },
-     extras: null
+      item: { id: 3, name: "Pizza", price: 8.49 },
+      extras: [{ id: 2, name: "Chilli", price: 1.99 }, { id: 3, name: "Onions", price: 1.99 }, { id: 3, name: "Thunfish", price: 1.99 }]
     };
-    /*
-    const samples = [
-      {count: 1, price_sum: 1.0, comment: "TEST", item: {id: 1, name: "ESSEN", price: 2.0}, extra: null},
-    ];*/
     orderStore.addOrder([exampleOrderItem1, exampleOrderItem2]);
   }
 </script>
