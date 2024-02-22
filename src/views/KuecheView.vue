@@ -2,6 +2,10 @@
   <div>
     <h1>Küche</h1>
     <button @click="addData">Add data</button>
+    <select v-model="selection" id="combo">
+      <option value="open">Offene Bestellungen</option>
+      <option value="filtered">Bearbeitete Bestellungen</option>
+    </select>
     <div id="flex-container">
       <div id="single-orders">
         <OffeneBestellungen />
@@ -10,7 +14,20 @@
         <SummeGerichte />
       </div>
       <div id="sidebar-right">
-        <h2>SIDEBAR</h2>
+        <div id="vertical-flex-container">
+          <div id="queue">
+            <h2>Warteschlange</h2>
+            <div id="red-queue">
+              <span>ROT</span>
+            </div>
+            <div id="yellow-queue">
+              <span>GELB</span>
+            </div>
+            <div id="green-queue">
+              <span>GRÜN</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -22,6 +39,8 @@
   import { useOrderStore } from '@/stores/orderStore';
   import { type Order, type OrderItem, type FoodItem } from '@/assets/interfaces';
   import { ref } from 'vue';
+
+  const selection: string = 'open';
 
   const orderStore = useOrderStore();
   const orders = ref(orderStore.getOrders);
@@ -62,5 +81,24 @@
 
 #sidebar-right {
   flex: 0 0 auto;
+}
+
+#vertical-flex-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+}
+
+#queue {
+  margin-right: 30px;
+}
+
+#queue > div {
+  padding: 50px;
+  margin-top: 10px;
+  border: 5px solid black;
+  text-align: center;
+  font-size: 24pt;
 }
 </style>
