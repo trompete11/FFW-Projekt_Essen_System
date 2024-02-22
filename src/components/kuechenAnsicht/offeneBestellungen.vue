@@ -14,6 +14,10 @@
     import { useOrderStore } from '@/stores/orderStore';
     import EinzelBestellung from '@/components/kuechenAnsicht/einzelneBestellung.vue';
 
+    const props = defineProps<{
+        selection: string;
+    }>();
+
     const orderStore = useOrderStore();
     const orders = ref(orderStore.getOrders);
 

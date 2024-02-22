@@ -8,7 +8,7 @@
     </select>
     <div id="flex-container">
       <div id="single-orders">
-        <OffeneBestellungen />
+        <OffeneBestellungen :selection="selection" />
       </div>
       <div id="sum-dishes"> <!-- Summe aller Gerichte ohne Beilagen -->
         <SummeGerichte />
