@@ -5,6 +5,7 @@
         </div>
 
         <div class="order-details">
+            <span>Nr. #{{ order_id }}</span>
             <div v-for="item in ords" :key="item.id">
                 <span>{{ item.count }}x {{ item.item.name }} <span v-for="extra in item.extras" :key="extra.id"> / {{ extra.name }}</span></span>
                 <span v-if="item.comment"> / Comment: {{ item.comment }}</span>
@@ -18,12 +19,13 @@
 </template>
 
 <script setup lang="ts">
-    import { type OrderItem } from '@/assets/interfaces';
+    import { type Order, type OrderItem } from '@/assets/interfaces';
     import { ref, defineProps, onMounted } from 'vue';
 
     // define property for input of orders
     const props = defineProps<{
         ords: OrderItem[];
+        order_id: number;
     }>();
 
     // variables for timer
