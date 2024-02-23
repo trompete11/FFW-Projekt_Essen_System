@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
     import { type Order, type OrderItem } from '@/assets/interfaces';
-import { useOrderStore } from '@/stores/orderStore';
+    import { useOrderStore } from '@/stores/orderStore';
     import { ref, defineProps, onMounted } from 'vue';
 
     // define property for input of orders

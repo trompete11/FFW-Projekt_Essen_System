@@ -14,20 +14,7 @@
         <SummeGerichte />
       </div>
       <div id="sidebar-right">
-        <div id="vertical-flex-container">
-          <div id="queue">
-            <h2>Warteschlange</h2>
-            <div id="red-queue">
-              <span>ROT</span>
-            </div>
-            <div id="yellow-queue">
-              <span>GELB</span>
-            </div>
-            <div id="green-queue">
-              <span>GRÜN</span>
-            </div>
-          </div>
-        </div>
+        <SidebarRight />
       </div>
     </div>
   </div>
@@ -36,6 +23,7 @@
 <script setup lang="ts">
   import OffeneBestellungen from '@/components/kuechenAnsicht/offeneBestellungen.vue';
   import SummeGerichte from '@/components/kuechenAnsicht/summeGerichte.vue';
+  import SidebarRight from '@/components/kuechenAnsicht/sidebar.vue'
   import { useOrderStore } from '@/stores/orderStore';
   import { type Order, type OrderItem, type FoodItem } from '@/assets/interfaces';
   import { ref } from 'vue';
@@ -81,24 +69,5 @@
 
 #sidebar-right {
   flex: 0 0 auto;
-}
-
-#vertical-flex-container {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  align-items: center;
-}
-
-#queue {
-  margin-right: 30px;
-}
-
-#queue > div {
-  padding: 50px;
-  margin-top: 10px;
-  border: 5px solid black;
-  text-align: center;
-  font-size: 24pt;
 }
 </style>
