@@ -1,7 +1,7 @@
 <template>
     <div class="order">
         <div class="checkbox">
-            <input type="checkbox">
+            <input type="checkbox" v-model="isChecked" @change="checkOrder">
         </div>
 
         <div class="order-details">
@@ -20,31 +20,47 @@
 
 <script setup lang="ts">
     import { type Order, type OrderItem } from '@/assets/interfaces';
+import { useOrderStore } from '@/stores/orderStore';
     import { ref, defineProps, onMounted } from 'vue';
 
     // define property for input of orders
     const props = defineProps<{
         ords: OrderItem[];
         order_id: number;
+        done: Order; // for setting time_done
     }>();
 
     // variables for timer
     const seconds = ref(0)
     const minutes = ref(0)
+    const isChecked = ref(false);
+    let stopTimer: boolean = false;
 
     const startTimer = (() => {
         const interval = setInterval(() => {
-            seconds.value++
-            if(seconds.value == 60){
-                seconds.value = 0
-                minutes.value++
+            if(!stopTimer){
+                seconds.value++
+                if(seconds.value == 60){
+                    seconds.value = 0
+                    minutes.value++
+                }
             }
         }, 1000)
+    })
+
+    const checkOrder = (() => {
+        if(isChecked){
+            stopTimer = true;
+            props.done.time_done = new Date().toLocaleTimeString();
+            console.log(props.done.time_done);
+        }
     })
 
     onMounted(() => {
         startTimer()
     })
+
+
 </script>
 
 <style scoped>

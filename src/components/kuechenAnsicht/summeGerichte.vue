@@ -14,7 +14,7 @@
 <script setup lang="ts">
     import { useOrderStore } from '@/stores/orderStore';
     import { ref, reactive, watchEffect } from 'vue';
-
+    
     const orderStore = useOrderStore();
     const orders = ref(orderStore.getOrders);
 
