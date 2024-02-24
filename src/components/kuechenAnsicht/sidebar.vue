@@ -15,13 +15,41 @@
           </div>
           <div id="back">
             <h3>Zurückholen</h3>
+            <div v-for="order in doneOrders" :key="order.id"> 
+              <FertigeBestellung :order="order" :uncheck="uncheckOrder" />
+            </div>
           </div>
         </div>
       </div>
 </template>
 
-<script setup>
-    
+<script setup lang="ts">
+  import { useOrderStore } from '@/stores/orderStore';
+  import { ref, reactive, watchEffect } from 'vue';
+  import { type Order } from '@/assets/interfaces';
+  import FertigeBestellung from '@/components/kuechenAnsicht/fertigeBestellung.vue';
+
+  const orderStore = useOrderStore();
+  const orders = ref(orderStore.getOrders);
+  const doneOrders = ref(new Set<Order>());
+  const isChecked = ref(true);
+
+  watchEffect(() => {
+    orders.value.forEach((order) => {
+      if(order.time_done && !order.time_gone){
+        doneOrders.value.add(order);
+      }
+    })
+  })
+
+  function uncheckOrder(id: Order, check: boolean): void {
+    console.log("ENTERED");
+    if(!check){
+      doneOrders.value.delete(id);
+      id.time_done = null;
+    }
+  }
+
 </script>
 
 <style scoped>
@@ -41,7 +69,7 @@
     margin-top: 10px;
     border: 5px solid black;
     text-align: center;
-    font-size: 24pt;
+    font-size: 16pt;
   }
   
   #back {

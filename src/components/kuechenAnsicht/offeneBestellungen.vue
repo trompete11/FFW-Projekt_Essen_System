@@ -5,7 +5,7 @@
     <div id="order-container">
         <!-- <div v-if="selection == 'open'"> -->
             <div v-for="order in orders" :key="order.id">
-                <EinzelBestellung :order_id="order.id" :ords="order.order_items" :done="order"/>
+                <EinzelBestellung v-if="!order.time_done" :order_id="order.id" :ords="order.order_items" :done="order"/>
             </div>
         <!-- </div> -->
         <!-- <div v-else>
