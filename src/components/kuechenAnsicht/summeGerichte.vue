@@ -13,20 +13,28 @@
 
 <script setup lang="ts">
     import { useOrderStore } from '@/stores/orderStore';
-    import { ref, reactive, watchEffect } from 'vue';
+    import { ref, reactive, watch, watchEffect } from 'vue';
+    import { type Order } from '@/assets/interfaces';
     
     const orderStore = useOrderStore();
     const orders = ref(orderStore.getOrders);
 
-    const sumMap: Map<string, number> = new Map();
-//
-    watchEffect(() => {
-        orders.value.forEach((order) => {
-            const reactiveOrder = reactive(order);
-            for (const item of reactiveOrder.order_items) {
+    //const sumMap: Map<string, number> = new Map();
+    const sumMap = ref(new Map<string, number>);
+
+    watch(orders.value, (n, ol) => {
+    //watchEffect(() => {
+        ol.forEach((order: Order) => {
+            console.log("A");
+            const o = order;
+            for (const item of order.order_items) {
+                console.log("B");
                 const itemName = item.item.name;
-                sumMap.set(itemName, item.count + (sumMap.get(itemName) ?? 0));
+                //console.log(sumMap.value.get(itemName));
+                console.log(itemName);
+                sumMap.value.set(itemName, item.count + (sumMap.value.get(itemName) ?? 0));
+                //console.log(sumMap.value.get(itemName));
             }
         });
-    });
+    }), {deep: true};
 </script>
