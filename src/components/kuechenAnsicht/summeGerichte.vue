@@ -18,23 +18,35 @@
     
     const orderStore = useOrderStore();
     const orders = ref(orderStore.getOrders);
-
-    //const sumMap: Map<string, number> = new Map();
+    let orderCount: number = -1;
     const sumMap = ref(new Map<string, number>);
 
-    watch(orders.value, (n, ol) => {
-    //watchEffect(() => {
-        ol.forEach((order: Order) => {
-            console.log("A");
-            const o = order;
-            for (const item of order.order_items) {
-                console.log("B");
+
+    watch(orders.value, (newOrder) => {
+        console.log(orderCount);
+        console.log(newOrder.length);
+        const latestOrder = newOrder[newOrder.length - 1];
+        if(latestOrder && newOrder.length > orderCount){
+            orderCount++;
+            if(newOrder.length == orderCount){ // work around
+                orderCount--;
+                return;
+            }
+            for (const item of latestOrder.order_items) {
                 const itemName = item.item.name;
-                //console.log(sumMap.value.get(itemName));
                 console.log(itemName);
                 sumMap.value.set(itemName, item.count + (sumMap.value.get(itemName) ?? 0));
-                //console.log(sumMap.value.get(itemName));
             }
-        });
-    }), {deep: true};
+        }
+
+        // drin lassen für spätere Problemerklärung in Doku
+        /*const commonKeys = Array.from(newMap.keys()).filter(key => oldMap.has(key));
+        commonKeys.forEach((key: string) => {
+            if(om != undefined && nm != undefined){
+                let x: number = nm.get(key);
+                let y: number = om.get(key);
+                sumMap.value.set(key, (x-y) ?? 0);
+            }
+        })*/
+    });
 </script>
