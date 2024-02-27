@@ -23,16 +23,6 @@ export const useOrderStore = defineStore('orderStore', () => {
       orders.value.filter(order => order.time_done !== null)
     }*/
   });
-  
-  function filterOrders(filter: string){
-    //const result = ref([] as Order[]);
-    if(filter == 'done'){
-      return orders.value.filter(order => order.time_done !== null);
-    } else if(filter == 'open'){
-      return orders.value.filter(order => order.time_done == null);
-    }
-    //return result;
-  }
 
   function addOrder(order_items:OrderItem[]) {
     id.value++

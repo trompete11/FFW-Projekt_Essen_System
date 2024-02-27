@@ -17,7 +17,7 @@
     import { type Order } from '@/assets/interfaces';
     
     const orderStore = useOrderStore();
-    const orders = ref(orderStore.getOrders);
+    const orders = ref(orderStore.getDoneOrders.open);
     let orderCount: number = -1;
     const sumMap = ref(new Map<string, number>);
 

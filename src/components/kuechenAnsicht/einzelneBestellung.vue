@@ -23,11 +23,13 @@
     import { useOrderStore } from '@/stores/orderStore';
     import { ref, defineProps, onMounted } from 'vue';
 
+    const orderStore = useOrderStore();
+    const setDone = orderStore.doneOrder;
+
     // define property for input of orders
     const props = defineProps<{
         ords: OrderItem[];
         order_id: number;
-        done: Order; // for setting time_done
     }>();
 
     // variables for timer
@@ -51,8 +53,7 @@
     const checkOrder = (() => {
         if(isChecked){
             stopTimer = true;
-            props.done.time_done = new Date().toLocaleTimeString();
-            console.log(props.done.time_done);
+            setDone(props.order_id-1, true);
         }
     })
 

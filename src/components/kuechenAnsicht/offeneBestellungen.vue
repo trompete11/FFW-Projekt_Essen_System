@@ -10,7 +10,7 @@
         </div>
         <div v-else>
             <div v-for="order in filteredOrders.done" :key="order.id">
-                <EinzelBestellung :order_id="order.id" :ords="order.order_items" :done="order"/>
+                <EinzelBestellung :order_id="order.id" :ords="order.order_items" />
             </div>
         </div>
     </div>
