@@ -1,12 +1,12 @@
 <template>
-    <div class="order">
+    <div class="order" :style="{backgroundColor: backgroundColor}">
         <div class="checkbox">
             <input type="checkbox" v-model="isChecked" @change="checkOrder">
         </div>
 
         <div class="order-details">
-            <span>Nr. #{{ order_id }}</span>
-            <div v-for="item in ords" :key="item.id">
+            <span>Nr. #{{ orderId }}</span>
+            <div v-for="item in ords" :key="ords.indexOf(item)">
                 <span>{{ item.count }}x {{ item.item.name }} <span v-for="extra in item.extras" :key="extra.id"> / {{ extra.name }}</span></span>
                 <span v-if="item.comment"> / Comment: {{ item.comment }}</span>
             </div>
@@ -21,47 +21,60 @@
 <script setup lang="ts">
     import { type Order, type OrderItem } from '@/assets/interfaces';
     import { useOrderStore } from '@/stores/orderStore';
-    import { ref, defineProps, onMounted } from 'vue';
-
-    const orderStore = useOrderStore();
-    const setDone = orderStore.doneOrder;
+    import { ref, defineProps, onMounted, watchEffect, watch } from 'vue';
 
     // define property for input of orders
     const props = defineProps<{
         ords: OrderItem[];
-        order_id: number;
+        orderId: number;
     }>();
 
+    const orderStore = useOrderStore();
+    const orders = ref(orderStore.getOrders);
+    const setDone = orderStore.doneOrder;
+    const order = orders.value[props.orderId];
+
     // variables for timer
-    const seconds = ref(0)
-    const minutes = ref(0)
+    const seconds = ref(0);
+    const minutes = ref(0);
     const isChecked = ref(false);
     let stopTimer: boolean = false;
+    const backgroundColor = ref('#4CAF50');
 
     const startTimer = (() => {
         const interval = setInterval(() => {
             if(!stopTimer){
-                seconds.value++
+                seconds.value++;
                 if(seconds.value == 60){
-                    seconds.value = 0
-                    minutes.value++
+                    seconds.value = 0;
+                    minutes.value++;
                 }
             }
         }, 1000)
     })
 
+    watch(() => minutes.value, (n, o) => {
+        console.log("MINUTES: ");
+        console.log(o);
+        console.log(n);
+        
+        if(n >= 1 && n < 2){
+            backgroundColor.value = '#FFC107';
+        } else if(n >= 2){
+            backgroundColor.value = '#F44336';
+        }
+    })
+
     const checkOrder = (() => {
         if(isChecked){
-            stopTimer = true;
-            setDone(props.order_id-1, true);
+            //stopTimer = true;
+            setDone(props.orderId-1, true);
         }
     })
 
     onMounted(() => {
         startTimer()
     })
-
-
 </script>
 
 <style scoped>
@@ -72,7 +85,6 @@
     justify-content: space-between;
     padding: 10px;
     margin-bottom: 10px;
-    /* add background color */
 }
 
 .checkbox {
@@ -96,6 +108,5 @@
     border: 1px solid white;
     text-align: right; 
     font-size: 48px;
-    color: red;
 }
 </style>

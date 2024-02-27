@@ -17,11 +17,11 @@
     import { type Order } from '@/assets/interfaces';
     
     const orderStore = useOrderStore();
-    const orders = ref(orderStore.getDoneOrders.open);
+    const orders = ref(orderStore.getFilteredOrders);
     let orderCount: number = -1;
     const sumMap = ref(new Map<string, number>);
 
-    watch(orders.value, (newOrder) => {
+    /*watch(orders.value, (newOrder) => {
         console.log(orderCount);
         console.log(newOrder.length);
         const latestOrder = newOrder[newOrder.length - 1];
@@ -47,7 +47,7 @@
                 sumMap.value.set(key, (x-y) ?? 0);
             }
         })*/
-    });
+    //});
     
-    provide('sumMap', sumMap);
+    //provide('sumMap', sumMap);
 </script>

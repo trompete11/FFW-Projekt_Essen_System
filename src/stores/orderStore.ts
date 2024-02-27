@@ -9,19 +9,13 @@ export const useOrderStore = defineStore('orderStore', () => {
 
   const getOrders = computed(() => orders.value)
   orders.value.filter
-  const getFilter = computed(() => filter.value)
+  //const getFilter = computed(() => filter.value)
   const getFilterdOrders = computed((filter: String) => orders.value) // @todo: implementation
-  const getFilteredOrders = computed(() => filterOrders(filter.value));
-  const getDoneOrders = computed(() => { 
+  const getFilteredOrders = computed(() => { 
     return {
       open: orders.value.filter((order) => order.time_done == null), 
       done: orders.value.filter((order) => order.time_done !== null)
     }
-    /*if(f == 'open'){
-      orders.value.filter(order => order.time_done == null)
-    } else if(f == 'done'){
-      orders.value.filter(order => order.time_done !== null)
-    }*/
   });
 
   function addOrder(order_items:OrderItem[]) {
@@ -52,5 +46,5 @@ export const useOrderStore = defineStore('orderStore', () => {
     orders.value.splice(orderId, 1)
   }
 
-  return { id, orders, getOrders, getFilterdOrders, addOrder, doneOrder, goneOrder, stornoOrder, getFilter, getFilteredOrders, getDoneOrders }
+  return { id, orders, getOrders, getFilterdOrders, addOrder, doneOrder, goneOrder, stornoOrder, getFilteredOrders }
 })

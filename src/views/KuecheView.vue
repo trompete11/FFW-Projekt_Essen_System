@@ -4,7 +4,7 @@
     <button @click="addData">Add data</button>
     <select v-model="filter" id="combo">
       <option value="open">Offene Bestellungen</option>
-      <option value="done">Bearbeitete Bestellungen</option>
+      <option value="done">Fertige Bestellungen</option>
     </select>
     <div id="flex-container">
       <div id="single-orders">
@@ -28,12 +28,9 @@
   import { type Order, type OrderItem, type FoodItem } from '@/assets/interfaces';
   import { ref } from 'vue';
 
-  const selection: string = 'open';
+  const filter = ref('open');
 
   const orderStore = useOrderStore();
-  const orders = ref(orderStore.getOrders);
-  const filter = ref(orderStore.getFilter);
-  const filteredOrders = ref(orderStore.getOrders)
 
   const addData = () => {
     const exampleOrderItem1: OrderItem = {

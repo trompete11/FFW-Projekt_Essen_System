@@ -5,12 +5,12 @@
     <div id="order-container">
         <div v-if="selection == 'open'">
             <div v-for="order in filteredOrders.open" :key="order.id">
-                <EinzelBestellung :order_id="order.id" :ords="order.order_items" :done="order"/>
+                <EinzelBestellung :orderId="order.id" :ords="order.order_items"/>
             </div>
         </div>
         <div v-else>
             <div v-for="order in filteredOrders.done" :key="order.id">
-                <EinzelBestellung :order_id="order.id" :ords="order.order_items" />
+                <EinzelBestellung :order-id="order.id" :ords="order.order_items" />
             </div>
         </div>
     </div>
@@ -27,13 +27,11 @@
 
     const orderStore = useOrderStore();
     const orders = ref(orderStore.getOrders);
-    const filter = ref(orderStore.getFilter);
-    const filteredOrders = ref(orderStore.getDoneOrders);
+    const filteredOrders = ref(orderStore.getFilteredOrders);
 
     watchEffect(() => {
         //orders.value = orderStore.getOrders;
-        filteredOrders.value = orderStore.getDoneOrders;
-        console.log(filter.value);
+        filteredOrders.value = orderStore.getFilteredOrders;
     });
 </script>
 
