@@ -13,14 +13,13 @@
 
 <script setup lang="ts">
     import { useOrderStore } from '@/stores/orderStore';
-    import { ref, reactive, watch, watchEffect } from 'vue';
+    import { ref, reactive, watch, watchEffect, provide } from 'vue';
     import { type Order } from '@/assets/interfaces';
     
     const orderStore = useOrderStore();
     const orders = ref(orderStore.getOrders);
     let orderCount: number = -1;
     const sumMap = ref(new Map<string, number>);
-
 
     watch(orders.value, (newOrder) => {
         console.log(orderCount);
@@ -49,4 +48,6 @@
             }
         })*/
     });
+    
+    provide('sumMap', sumMap);
 </script>

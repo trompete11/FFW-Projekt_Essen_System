@@ -2,13 +2,13 @@
   <div>
     <h1>Küche</h1>
     <button @click="addData">Add data</button>
-    <select v-model="selection" id="combo">
+    <select v-model="filter" id="combo">
       <option value="open">Offene Bestellungen</option>
-      <option value="filtered">Bearbeitete Bestellungen</option>
+      <option value="done">Bearbeitete Bestellungen</option>
     </select>
     <div id="flex-container">
       <div id="single-orders">
-        <OffeneBestellungen :selection="selection" />
+        <OffeneBestellungen :selection="filter" />
       </div>
       <div id="sum-dishes"> <!-- Summe aller Gerichte ohne Beilagen -->
         <SummeGerichte />
@@ -32,6 +32,8 @@
 
   const orderStore = useOrderStore();
   const orders = ref(orderStore.getOrders);
+  const filter = ref(orderStore.getFilter);
+  const filteredOrders = ref(orderStore.getOrders)
 
   const addData = () => {
     const exampleOrderItem1: OrderItem = {

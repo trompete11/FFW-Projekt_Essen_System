@@ -3,16 +3,16 @@
         <h2>Offene Bestellungen</h2>
     </div>
     <div id="order-container">
-        <!-- <div v-if="selection == 'open'"> -->
-            <div v-for="order in orders" :key="order.id">
-                <EinzelBestellung v-if="!order.time_done" :order_id="order.id" :ords="order.order_items" :done="order"/>
+        <div v-if="selection == 'open'">
+            <div v-for="order in filteredOrders.open" :key="order.id">
+                <EinzelBestellung :order_id="order.id" :ords="order.order_items" :done="order"/>
             </div>
-        <!-- </div> -->
-        <!-- <div v-else>
-            <div v-for="order in filteredOrders" :key="order.id">
-                <EinzelBestellung :order_id="order.id" :ords="order.order_items"/>
+        </div>
+        <div v-else>
+            <div v-for="order in filteredOrders.done" :key="order.id">
+                <EinzelBestellung :order_id="order.id" :ords="order.order_items" :done="order"/>
             </div>
-        </div> -->
+        </div>
     </div>
 </template>
 
@@ -27,11 +27,13 @@
 
     const orderStore = useOrderStore();
     const orders = ref(orderStore.getOrders);
-    const filteredOrders = ref(orderStore.getFilterdOrders);
+    const filter = ref(orderStore.getFilter);
+    const filteredOrders = ref(orderStore.getDoneOrders);
 
     watchEffect(() => {
-        orders.value = orderStore.getOrders;
-        filteredOrders.value = orderStore.getFilterdOrders
+        //orders.value = orderStore.getOrders;
+        filteredOrders.value = orderStore.getDoneOrders;
+        console.log(filter.value);
     });
 </script>
 
