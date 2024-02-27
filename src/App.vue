@@ -51,7 +51,7 @@ function timeFormat() {
   let hs = '' + h
   let ms = '' + m
   let ss = '' + s
-  if (h < 10) {
+  if (h < 10) { 
     hs = '0' + h
   }
   if (m < 10) {
