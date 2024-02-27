@@ -6,15 +6,12 @@ defineProps<{
 </script>
 
 <template>
-  <div
-    class="row align-items-center todo-item"
-    :class="{
-      'todo-normal':
-        (timeCount(data.time_in).valueOf() < 420000) || data.time_done !== null,
-      'todo-red': (timeCount(data.time_in).valueOf() > 420000) && data.time_done !== null,
-      'todo-new': timeCount(data.time_in).valueOf() < 60000 && data.time_done !== null
-    }"
-  >
+  <div class="row align-items-center todo-item" :class="{
+    'todo-normal':
+      (timeCount(data.time_in).valueOf() < 420000) || data.time_done !== null,
+    'todo-red': (timeCount(data.time_in).valueOf() > 420000) && data.time_done !== null,
+    'todo-new': timeCount(data.time_in).valueOf() < 60000 && data.time_done !== null
+  }">
     <div class="col-1 align-items-center checker">
       <input type="checkbox" name="test" checked @click="$emit('click', data.id)" v-if="data.time_done !== null" />
       <input type="checkbox" name="test" v-else @click="$emit('click', data.id)" />
@@ -23,15 +20,12 @@ defineProps<{
       <div class="nummer">Nr: {{ numDisplay(data.id) }}</div>
       <div v-for="essen in data.order_items" :key="essen.id">
         {{ essen.count }}x {{ essen.item.name }} /
-        <span v-for="extra in essen.extras" :key="extra.id"
-          >{{ extra.name }}, </span
-        ><br />
+        <span v-for="extra in essen.extras" :key="extra.id">{{ extra.name }}, </span><br />
         <span v-if="essen.comment !== ''">{{ essen.comment }}</span>
       </div>
     </div>
     <div class="col-3 time" v-if="data.time_done != null">
-      <i>fertig: {{ timeFormat(data.time_done) }}</i
-      ><br />{{ timeFormat(timeCount(data.time_in, data.time_done)) }}
+      <i>fertig: {{ timeFormat(data.time_done) }}</i><br />{{ timeFormat(timeCount(data.time_in, data.time_done)) }}
     </div>
     <div class="col-3 time" v-else>{{ timeFormat(time) }}</div>
   </div>
@@ -55,7 +49,7 @@ export default {
     }
   },
   mounted: function () {
-    //this.updateTime()
+    this.updateTime()
   }
 }
 
@@ -78,7 +72,7 @@ function timeFormat(date: Date) {
   return out
 }
 
-function timeCount(a:Date, b:Date | null = null):Date {
+function timeCount(a: Date, b: Date | null = null): Date {
   if (b === null) {
     b = new Date()
   }
@@ -100,10 +94,12 @@ function numDisplay(num: number) {
 .nummer {
   font-size: x-large;
 }
+
 .item_in {
   font-size: larger;
   font-weight: bold;
 }
+
 .todo-item {
   padding: 0.5em 1em;
   margin: 1rem 0;
