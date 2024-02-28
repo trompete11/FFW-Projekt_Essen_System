@@ -71,11 +71,12 @@ const addData = () => {
 
 #sum-dishes {
   flex: 1;
-  margin-left: 10%;
+  text-align: center;
 }
 
 #sidebar-right {
   flex: 0 0 auto;
+  margin-right: 1%;
 }
 </style>
 

@@ -1,14 +1,17 @@
 <template>
-  <div>
-    <h2>Offene Bestellungen</h2>
-  </div>
   <div id="order-container">
     <div v-if="selection == 'open'">
+      <div>
+        <h2>Offene Bestellungen: {{ orderStore.getFilteredOrders.open.length }}</h2>
+      </div>
       <div v-for="order in filteredOrders.open" :key="order.id">
         <EinzelBestellung :orderId="order.id" :ords="order.order_items" />
       </div>
     </div>
     <div v-else>
+      <div>
+        <h2>Fertige Bestellungen: {{ orderStore.getFilteredOrders.done.length }}</h2>
+      </div>
       <div v-for="order in filteredOrders.done" :key="order.id">
         <EinzelBestellung :order-id="order.id" :ords="order.order_items" />
       </div>
@@ -36,8 +39,8 @@ watchEffect(() => {
 </script>
 
 <style scoped>
-#order-container {
-  max-height: 800px;
-  overflow-y: auto;
-}
+  #order-container {
+    max-height: 800px;
+    overflow-y: auto;
+  }
 </style>
