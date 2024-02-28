@@ -58,9 +58,9 @@
         console.log(o);
         console.log(n);
         
-        if(n >= 1 && n < 2){
+        if(n >= 2 && n < 4){
             backgroundColor.value = '#FFC107';
-        } else if(n >= 2){
+        } else if(n >= 4){
             backgroundColor.value = '#F44336';
         }
     })

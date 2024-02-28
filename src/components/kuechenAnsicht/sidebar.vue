@@ -91,4 +91,16 @@
     flex: 1;
     align-items: center;
   }
+
+  #red-queue {
+    background-color: rgb(255, 0, 0, 0.5);
+  }
+
+  #yellow-queue {
+    background-color: rgb(255, 255, 0, 0.5);
+  }
+
+  #green-queue {
+    background-color: rgb(0, 255, 0, 0.5);
+  }
 </style>
