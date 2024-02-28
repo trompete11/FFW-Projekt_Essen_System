@@ -44,13 +44,9 @@ export default {
         updateFormattedTime() {
             const { time_done } = this.order;
             if (time_done) {
-                const [doneHours, doneMinutes, doneSeconds] = time_done.split(':');
-                const doneTime = new Date();
-                doneTime.setHours(parseInt(doneHours, 10));
-                doneTime.setMinutes(parseInt(doneMinutes, 10));
-                doneTime.setSeconds(parseInt(doneSeconds, 10));
+                const Time = new Date(time_in);
                 const currentTime = new Date();
-                const difference = currentTime.getTime() - doneTime.getTime();
+                const difference = currentTime.getTime() - Time.getTime();
 
                 const differenceInSeconds = Math.floor(difference / 1000);
                 const hours = String(Math.floor(differenceInSeconds / 3600)).padStart(2, '0');

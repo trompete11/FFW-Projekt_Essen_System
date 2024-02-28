@@ -20,12 +20,20 @@
 <script>
 import { reactive, computed } from 'vue';
 import { useOrderStore } from '@/stores/orderStore';
+import config from '@/components/ausgabeAnsicht/configAusgabeAnsicht.js';
 import readyOrderBox from '@/components/ausgabeAnsicht/readyOrderBox.vue';
 import buildOrderBox from '@/components/ausgabeAnsicht/buildOrderBox.vue';
 import allOrderBox from '@/components/ausgabeAnsicht/allOrderBox.vue';
 import backOrderBox from '@/components/ausgabeAnsicht/backOrderBox.vue';
 
 export default {
+    data() {
+        return {
+            shortOrderT: config.shortOrderT,
+            mediumOrderT: config.mediumOrderT,
+            longOrderT: config.longOrderT
+        }
+    },
     props: ['filterSelection'],
     setup(props) {
         const orderStore = useOrderStore();

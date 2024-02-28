@@ -10,6 +10,12 @@
       <span style="margin-left: 25px;">
         <button class="button" @click="handleFilterBack">Bestellung(en) zurückholen</button>
       </span>
+      <span style="margin-left: 100px;">
+        Ansicht
+      </span>
+      <span style="margin-left: 25px;">
+        <!-- <queue></queue> -->
+      </span>
     </div>
     <div style="margin-top: 15px;">
       <leftView :filterSelection="selectedFilter"></leftView>
@@ -18,8 +24,9 @@
 </template>
 
 <script lang="ts">
-import leftView from '@/components/ausgabeAnsicht/leftView.vue';
 import filteredOrders from '@/components/ausgabeAnsicht/filteredOrders.vue';
+import queue from '@/components/ausgabeAnsicht/queue.vue';
+import leftView from '@/components/ausgabeAnsicht/leftView.vue';
 
 export default {
   data() {
@@ -37,6 +44,7 @@ export default {
   },
   components: {
     leftView,
+    queue,
     filteredOrders
   }
 };
