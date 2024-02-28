@@ -1,15 +1,11 @@
 <template>
-    <h2>Übersicht aller Gerichtey XXX</h2>
+    <h2>Übersicht aller Gerichte</h2>
     <div>
         <div v-for="[key, value] in sumMap" :key="key">
-            <span>{{ value }}x {{ key }}</span>
+            <span id="sum">{{ value }}x {{ key }}</span>
         </div>
     </div>
 </template>
-
-<style scoped>
-
-</style>
 
 <script setup lang="ts">
     import { useOrderStore } from '@/stores/orderStore';
@@ -18,8 +14,6 @@
     
     const orderStore = useOrderStore();
     const orders = ref(orderStore.getFilteredOrders);
-    let orderCount: number = -1;
-    //const sumMap = ref(new Map<string, number>);
 
     const sumMap = computed(() => {
         const newMap = new Map<string, number>;
@@ -32,13 +26,9 @@
         })
         return newMap;
     })
-    
-    const sumMap2 = computed(() => sumMap.value);
 
     watchEffect(() =>{
-        console.log("entered watcheffect");
         orders.value = orderStore.getFilteredOrders;
-        console.log(sumMap.value.get("Burger"));
     })
 
     /*watch(orders.value, (newOrder) => {
@@ -69,3 +59,9 @@
         })*/
     //});
 </script>
+
+<style scoped>
+    #sum {
+        font-size: 20pt;
+    }
+</style>

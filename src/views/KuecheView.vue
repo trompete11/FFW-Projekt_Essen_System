@@ -66,14 +66,23 @@ const addData = () => {
 
 #single-orders {
   flex: 1;
+  margin-left: 1%;
 }
 
 #sum-dishes {
   flex: 1;
-  margin-left: 10px;
+  margin-left: 10%;
 }
 
 #sidebar-right {
   flex: 0 0 auto;
 }
+</style>
+
+<style>
+  h2 {
+    text-decoration: underline;
+    line-height: 1.5;
+    text-align: center;
+  }
 </style>

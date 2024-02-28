@@ -54,9 +54,7 @@ const startTimer = () => {
   }, 1000)
 }
 
-watch(
-  () => minutes.value,
-  (n, o) => {
+watch(() => minutes.value,(n, o) => {
     if (n >= 2 && n < 4) {
       backgroundColor.value = '#FFC107'
     } else if (n >= 4) {
@@ -80,7 +78,7 @@ onMounted(() => {
 <style scoped>
 .order {
   display: flex;
-  border: 1px solid white;
+  border-radius: 60px;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
@@ -95,7 +93,6 @@ onMounted(() => {
 }
 
 .order-details {
-  border: 1px solid green;
   flex-grow: 1; /* use available space */
   display: flex;
   flex-direction: column;
@@ -105,7 +102,6 @@ onMounted(() => {
 }
 
 .timer {
-  border: 1px solid white;
   text-align: right;
   font-size: 48px;
 }

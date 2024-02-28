@@ -62,12 +62,14 @@ function uncheckOrder(order: Order, check: boolean): void {
 
 #queue {
   margin-right: 30px;
+  
 }
 
 #queue > div {
   padding: 50px;
   margin-top: 10px;
   border: 5px solid black;
+  border-radius: 100px;
   text-align: center;
   font-size: 16pt;
 }

@@ -39,6 +39,5 @@ watchEffect(() => {
 #order-container {
   max-height: 800px;
   overflow-y: auto;
-  border: 1px solid red;
 }
 </style>
