@@ -1,10 +1,10 @@
 <template>
-    <div class="order-box">
+    <div class="order-box" :class="statusDetection(order)">
         <div class="order-header">
             <h2>#{{ order.id }}</h2>
             <div class="order-dates">
                 <p class="order-time">Bestellzeit: {{ formatTime(order.time_in) }}</p>
-                <p class="order-time">Abholbereit seit: {{ formattedTime }}</p>
+                <p class="order-time">In Bearbeitung seit: {{ formattedTime }}</p>
             </div>
         </div>
         <div class="order-items">
@@ -41,14 +41,17 @@ export default {
             const time = new Date(timeString);
             return time.toLocaleString();
         },
+        statusDetection(order) {
+            if (order.time_gone === null && order.time_done === null) {
+                return "In-Bearbeitung";
+            } else {
+                return "Undefiniert";
+            }
+        },
         updateFormattedTime() {
-            const { time_done } = this.order;
-            if (time_done) {
-                const [doneHours, doneMinutes, doneSeconds] = time_done.split(':');
-                const doneTime = new Date();
-                doneTime.setHours(parseInt(doneHours, 10));
-                doneTime.setMinutes(parseInt(doneMinutes, 10));
-                doneTime.setSeconds(parseInt(doneSeconds, 10));
+            const { time_in } = this.order;
+            if (time_in) {
+                const doneTime = new Date(time_in);
                 const currentTime = new Date();
                 const difference = currentTime.getTime() - doneTime.getTime();
 
@@ -65,10 +68,19 @@ export default {
 </script>
 
 <style scoped>
+.order-box.In-Bearbeitung {
+    background-color: #fd9948;
+}
+
+.order-box.Undefiniert {
+    background-color: #c01919;
+}
+
 .order-box {
+    border-radius: 6px;
     padding: 5px;
-    margin-bottom: 10px;
-    max-width: 500px;
+    margin-bottom: 0px;
+    max-width: 5000px;
 }
 
 .order-header {

@@ -1,7 +1,15 @@
 <template>
     <div class="orders-container">
-        <li v-for="order in filteredOrders" :key="order.id" class="order-item" @click="handleOrderClick(order)">
-            <readyOrderBox :order="order" />
+        <li v-for="order in filteredOrders" :key="order.id" class="order-item">
+            <template v-if="filterSelection === 'ready'">
+                <readyOrderBox :order="order" @click="handleOrderClick(order)" />
+            </template>
+            <template v-else-if="filterSelection === 'build'">
+                <buildOrderBox :order="order" />
+            </template>
+            <template v-else>
+                <allOrderBox :order="order" />
+            </template>
         </li>
     </div>
 </template>
@@ -61,7 +69,7 @@ export default {
 
 .order-item {
     border-radius: 6px;
-    background-color: #d7a4a4;
+    background-color: #afd7a4;
     width: calc(16.75% - 10px);
     margin-bottom: 10px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 1);

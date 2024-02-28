@@ -24,7 +24,7 @@ import filteredOrders from '@/components/ausgabeAnsicht/filteredOrders.vue';
 export default {
   data() {
     return {
-      selectedFilter: 'ready'
+      selectedFilter: "ready"
     };
   },
   methods: {
