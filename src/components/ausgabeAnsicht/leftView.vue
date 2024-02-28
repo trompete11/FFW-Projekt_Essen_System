@@ -7,6 +7,9 @@
             <template v-else-if="filterSelection === 'build'">
                 <buildOrderBox :order="order" />
             </template>
+            <template v-else-if="filterSelection === 'back'">
+                <backOrderBox :order="order" @click="handleOrderClickBack(order)" />
+            </template>
             <template v-else>
                 <allOrderBox :order="order" />
             </template>
@@ -20,6 +23,7 @@ import { useOrderStore } from '@/stores/orderStore';
 import readyOrderBox from '@/components/ausgabeAnsicht/readyOrderBox.vue';
 import buildOrderBox from '@/components/ausgabeAnsicht/buildOrderBox.vue';
 import allOrderBox from '@/components/ausgabeAnsicht/allOrderBox.vue';
+import backOrderBox from '@/components/ausgabeAnsicht/backOrderBox.vue';
 
 export default {
     props: ['filterSelection'],
@@ -29,9 +33,11 @@ export default {
 
         const filteredOrders = computed(() => {
             if (props.filterSelection === 'ready') {
-                return orders.filter(order => order.time_gone === null && order.time_done !== null && order.time_done !== undefined);
+                return orders.filter(order => order.time_gone === null && order.time_done !== null);
             } else if (props.filterSelection === 'build') {
-                return orders.filter(order => order.time_done === null || order.time_done === undefined && order.time_gone === null);
+                return orders.filter(order => order.time_done === null && order.time_gone === null);
+            } else if (props.filterSelection === 'back') {
+                return orders.filter(order => order.time_done !== null && order.time_gone !== null);
             } else {
                 return orders;
             }
@@ -43,16 +49,23 @@ export default {
             }
         };
 
+        const handleOrderClickBack = (order) => {
+            console.log(order.id - 1);
+            orderStore.goneOrder(order.id - 1, false);
+        }
+
         return {
             orders,
             filteredOrders,
-            handleOrderClick
+            handleOrderClick,
+            handleOrderClickBack
         };
     },
     components: {
         readyOrderBox,
         buildOrderBox,
-        allOrderBox
+        allOrderBox,
+        backOrderBox
     }
 }
 </script>

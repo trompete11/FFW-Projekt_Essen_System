@@ -3,6 +3,7 @@
         <option value="all">Alle Bestellungen</option>
         <option value="build">Bestellungen in Bearbeitung</option>
         <option value="ready">Fertig zur Abholung</option>
+        <option v-if="hide" value="back">Bestellungen zurückholen</option>
     </select>
 </template>
 
@@ -10,7 +11,8 @@
 export default {
     data() {
         return {
-            selection: 'ready'
+            selection: 'ready',
+            hide: false
         };
     },
     methods: {
@@ -21,6 +23,11 @@ export default {
     watch: {
         externalData(newValue) {
             this.selection = newValue;
+            if (this.selection === "back") {
+                this.hide = true;
+            } else {
+                this.hide = false;
+            }
         }
     },
     props: ['externalData']

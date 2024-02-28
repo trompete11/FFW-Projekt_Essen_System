@@ -8,7 +8,7 @@
         Ansichten: <filteredOrders :external-data="selectedFilter" @filter-change="handleFilterChange"></filteredOrders>
       </span>
       <span style="margin-left: 25px;">
-        <button class="button" @click="handleFilterAll">Bestellung(en) zurückholen</button>
+        <button class="button" @click="handleFilterBack">Bestellung(en) zurückholen</button>
       </span>
     </div>
     <div style="margin-top: 15px;">
@@ -31,8 +31,8 @@ export default {
     handleFilterChange(selection: string) {
       this.selectedFilter = selection;
     },
-    handleFilterAll() {
-      this.selectedFilter = "all";
+    handleFilterBack() {
+      this.selectedFilter = "back";
     }
   },
   components: {

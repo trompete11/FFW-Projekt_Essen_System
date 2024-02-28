@@ -1,10 +1,11 @@
 <template>
-    <div class="order-box" :class="statusDetection(order)">
+    <div class="order-box">
         <div class="order-header">
             <h2>#{{ order.id }}</h2>
             <div class="order-dates">
                 <p class="order-time">Bestellzeit: {{ formatTime(order.time_in) }}</p>
-                <p class="order-time">Status: {{ statusDetection(order) }}</p>
+                <p class="order-time">Auslieferungsdatum: {{ formatTime(order.time_gone) }}</p>
+                <p class="order-time">Status: {{ "Ausgeliefert" }}</p>
             </div>
         </div>
         <div class="order-items">
@@ -31,45 +32,12 @@ export default {
         formatTime(timeString) {
             const time = new Date(timeString);
             return time.toLocaleString();
-        },
-        statusDetection(order) {
-            if (order.time_gone !== null && order.time_done !== null) {
-                return "Ausgeliefert";
-            } else if (order.time_gone === null && order.time_done !== null) {
-                return "Abholbereit";
-            } else if (order.time_gone === null && order.time_done === null) {
-                return "In-Bearbeitung";
-            } else if (order.time_gone !== null && order.time_done === null) {
-                return "Nicht-in-Bearbeitung";
-            } else {
-                return "Undefiniert";
-            }
         }
     }
 }
 </script>
 
 <style scoped>
-.order-box.Ausgeliefert {
-    background-color: #afd7a4;
-}
-
-.order-box.Abholbereit {
-    background-color: #FFE58A;
-}
-
-.order-box.In-Bearbeitung {
-    background-color: #fd9948;
-}
-
-.order-box.Nicht-in-Bearbeitung {
-    background-color: #ff6060;
-}
-
-.order-box.Undefiniert {
-    background-color: #c01919;
-}
-
 .order-box {
     border-radius: 6px;
     padding: 5px;
