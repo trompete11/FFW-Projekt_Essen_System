@@ -37,28 +37,27 @@ export default {
     props: ['filterSelection'],
     setup(props) {
         const orderStore = useOrderStore();
-        const orders = orderStore.getOrders;
+        const orders = orderStore.orders;
 
         const filteredOrders = computed(() => {
             if (props.filterSelection === 'ready') {
-                return orders.filter(order => order.time_gone === null && order.time_done !== null);
+                return orderStore.getFilteredOrders.oDone;
             } else if (props.filterSelection === 'build') {
-                return orders.filter(order => order.time_done === null && order.time_gone === null);
+                return orderStore.getFilteredOrders.open;
             } else if (props.filterSelection === 'back') {
-                return orders.filter(order => order.time_done !== null && order.time_gone !== null);
+                return orderStore.getFilteredOrders.gone;
             } else {
                 return orders;
             }
         });
 
         const handleOrderClick = (order) => {
-            if (order.time_gone === null || order.time_gone === undefined) {
+            if (order.time_gone === null) {
                 orderStore.goneOrder(order.id - 1);
             }
         };
 
         const handleOrderClickBack = (order) => {
-            console.log(order.id - 1);
             orderStore.goneOrder(order.id - 1, false);
         }
 

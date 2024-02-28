@@ -9,21 +9,14 @@
             </div>
         </div>
         <div class="order-items">
-            <ul>
-                <li v-for="(orderItem, index) in order.order_items" :key="index">
-                    <span>{{ orderItem.count }}x {{ orderItem.item.name }}</span>
-                    <div v-if="orderItem.extras && orderItem.extras.length > 0">
-                        <span v-for="(extra, extraIndex) in orderItem.extras" :key="extraIndex">
-                            <span v-if="extraIndex > 0"> + </span>{{ extra.name }}
-                        </span>
-                    </div>
-                </li>
-            </ul>
+            <ausgabeOrder :order-items="order.order_items" />
         </div>
     </div>
 </template>
 
 <script>
+import ausgabeOrder from '@/components/ausgabeAnsicht/ausgabeOrder.vue';
+
 export default {
     props: {
         order: Object
@@ -33,6 +26,9 @@ export default {
             const time = new Date(timeString);
             return time.toLocaleString();
         }
+    },
+    components: {
+        ausgabeOrder
     }
 }
 </script>

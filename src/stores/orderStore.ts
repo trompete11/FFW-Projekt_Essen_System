@@ -10,11 +10,13 @@ export const useOrderStore = defineStore('orderStore', () => {
   const getOrders = computed(() => orders.value)
   orders.value.filter
   //const getFilter = computed(() => filter.value)
-  const getFilterdOrders = computed((filter: String) => orders.value) // @todo: implementation
+  const getFilterdOrders = computed((filter: String) => orders.value)
   const getFilteredOrders = computed(() => { 
     return {
-      open: orders.value.filter((order) => order.time_done == null), 
-      done: orders.value.filter((order) => order.time_done !== null)
+      open: orders.value.filter((order) => order.time_done == null),
+      done: orders.value.filter((order) => order.time_done !== null),
+      oDone: orders.value.filter((order) => order.time_gone === null && order.time_done !== null),
+      gone: orders.value.filter((order) => order.time_done !== null && order.time_gone !== null)
     }
   });
 
