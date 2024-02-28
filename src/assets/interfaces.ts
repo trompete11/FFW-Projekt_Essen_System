@@ -9,7 +9,7 @@ export interface FoodItem {
 export interface OrderItem {
     count: number
     price_sum: number
-    comment: string | null
+    comment?: string | null
     item: FoodItem
     extras: FoodItem[]
 }
