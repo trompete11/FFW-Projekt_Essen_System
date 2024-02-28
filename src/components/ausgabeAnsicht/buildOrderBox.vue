@@ -69,7 +69,7 @@ export default {
 }
 
 .order-box.Undefiniert {
-    background-color: #c01919;
+    background-color: #ff6060;
 }
 
 .order-box {
