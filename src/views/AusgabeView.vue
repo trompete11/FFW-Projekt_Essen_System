@@ -4,7 +4,12 @@
       <h1>Ausgabe</h1>
     </div>
     <div>
-      <filteredOrders @filter-change="handleFilterChange"></filteredOrders>
+      <span>
+        Ansichten: <filteredOrders :external-data="selectedFilter" @filter-change="handleFilterChange"></filteredOrders>
+      </span>
+      <span style="margin-left: 25px;">
+        <button class="button" @click="handleFilterAll">Bestellung(en) zurückholen</button>
+      </span>
     </div>
     <div style="margin-top: 15px;">
       <leftView :filterSelection="selectedFilter"></leftView>
@@ -26,6 +31,9 @@ export default {
     handleFilterChange(selection: string) {
       this.selectedFilter = selection;
     },
+    handleFilterAll() {
+      this.selectedFilter = "all";
+    }
   },
   components: {
     leftView,
@@ -33,3 +41,23 @@ export default {
   }
 };
 </script>
+
+<style>
+.button {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 13px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #c23838;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+</style>

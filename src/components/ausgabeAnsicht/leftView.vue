@@ -1,7 +1,7 @@
 <template>
     <div class="orders-container">
         <li v-for="order in filteredOrders" :key="order.id" class="order-item" @click="handleOrderClick(order)">
-            <OrderBox :order="order" />
+            <readyOrderBox :order="order" />
         </li>
     </div>
 </template>
@@ -9,7 +9,9 @@
 <script>
 import { reactive, computed } from 'vue';
 import { useOrderStore } from '@/stores/orderStore';
-import OrderBox from '@/components/ausgabeAnsicht/OrderBox.vue';
+import readyOrderBox from '@/components/ausgabeAnsicht/readyOrderBox.vue';
+import buildOrderBox from '@/components/ausgabeAnsicht/buildOrderBox.vue';
+import allOrderBox from '@/components/ausgabeAnsicht/allOrderBox.vue';
 
 export default {
     props: ['filterSelection'],
@@ -18,7 +20,6 @@ export default {
         const orders = orderStore.getOrders;
 
         const filteredOrders = computed(() => {
-            console.log(props.filterSelection)
             if (props.filterSelection === 'ready') {
                 return orders.filter(order => order.time_gone === null && order.time_done !== null && order.time_done !== undefined);
             } else if (props.filterSelection === 'build') {
@@ -41,13 +42,16 @@ export default {
         };
     },
     components: {
-        OrderBox
+        readyOrderBox,
+        buildOrderBox,
+        allOrderBox
     }
 }
 </script>
 
 <style scoped>
 .orders-container {
+    border-radius: 6px;
     display: flex;
     list-style-type: none;
     flex-wrap: wrap;
@@ -56,6 +60,7 @@ export default {
 }
 
 .order-item {
+    border-radius: 6px;
     background-color: #d7a4a4;
     width: calc(16.75% - 10px);
     margin-bottom: 10px;
