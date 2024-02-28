@@ -25,13 +25,13 @@
     watch(orders.value, (n, ol) => {
     //watchEffect(() => {
         ol.forEach((order: Order) => {
-            console.log("A");
+            //console.log("A");
             const o = order;
             for (const item of order.order_items) {
-                console.log("B");
+                //console.log("B");
                 const itemName = item.item.name;
                 //console.log(sumMap.value.get(itemName));
-                console.log(itemName);
+                //console.log(itemName);
                 sumMap.value.set(itemName, item.count + (sumMap.value.get(itemName) ?? 0));
                 //console.log(sumMap.value.get(itemName));
             }
