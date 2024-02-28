@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
   import { useOrderStore } from '@/stores/orderStore';
-  import { ref, reactive, watchEffect } from 'vue';
+  import { ref, reactive, watchEffect, inject } from 'vue';
   import { type Order } from '@/assets/interfaces';
   import FertigeBestellung from '@/components/kuechenAnsicht/fertigeBestellung.vue';
 
@@ -34,10 +34,22 @@
   const doneOrders = ref(new Set<Order>());
   const isChecked = ref(true);
 
+  //const sumMap = ref(inject('sumMap', null));
+
   watchEffect(() => {
     orders.value.forEach((order) => {
       if(order.time_done && !order.time_gone){
+        /*if(doneOrders.value.size > 4){
+          doneOrders.value.
+        }*/
         doneOrders.value.add(order);
+        
+        /*for(const item of order.order_items){
+          if(sumMap){
+            let current: number = sumMap.get(item.item.name);
+            sumMap.set(item.item.name, current - item.count);
+          }
+        }*/
       }
     })
   })
@@ -78,5 +90,17 @@
     border: 5px dashed red;
     flex: 1;
     align-items: center;
+  }
+
+  #red-queue {
+    background-color: rgb(255, 0, 0, 0.5);
+  }
+
+  #yellow-queue {
+    background-color: rgb(255, 255, 0, 0.5);
+  }
+
+  #green-queue {
+    background-color: rgb(0, 255, 0, 0.5);
   }
 </style>

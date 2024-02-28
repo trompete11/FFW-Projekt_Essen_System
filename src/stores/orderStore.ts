@@ -5,9 +5,18 @@ import { type Order, type OrderItem } from '@/assets/interfaces'
 export const useOrderStore = defineStore('orderStore', () => {
   const id = ref(0)
   const orders = ref([] as Order[])
+  const filter = ref('open');
 
   const getOrders = computed(() => orders.value)
+  orders.value.filter
+  //const getFilter = computed(() => filter.value)
   const getFilterdOrders = computed((filter: String) => orders.value) // @todo: implementation
+  const getFilteredOrders = computed(() => { 
+    return {
+      open: orders.value.filter((order) => order.time_done == null), 
+      done: orders.value.filter((order) => order.time_done !== null)
+    }
+  });
 
   function addOrder(order_items: OrderItem[]) {
     id.value++
@@ -41,5 +50,5 @@ export const useOrderStore = defineStore('orderStore', () => {
     orders.value.splice(orderId, 1)
   }
 
-  return { id, orders, getOrders, getFilterdOrders, addOrder, doneOrder, goneOrder, stornoOrder }
+  return { id, orders, getOrders, getFilterdOrders, addOrder, doneOrder, goneOrder, stornoOrder, getFilteredOrders }
 })
