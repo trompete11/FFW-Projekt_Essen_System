@@ -1,33 +1,32 @@
 <template>
-    <div>
-        <input type="checkbox" v-model="isChecked" @change="uncheck(order, isChecked)" value="isChecked">
-        <span> Nr. #{{ order.id }}</span>
-    </div>
+  <div>
+    <input type="checkbox" @change="setDone(props.orderId - 1, false)" checked />
+    <span> Nr. #{{ props.orderId }}</span>
+  </div>
 </template>
 
 <script setup lang="ts">
-  import { useOrderStore } from '@/stores/orderStore';
-  import { ref, reactive, watchEffect } from 'vue';
-  import { type Order } from '@/assets/interfaces';
-    
-  //const props = defineProps(['order', 'uncheck']);
+import { useOrderStore } from '@/stores/orderStore'
+import { ref, reactive, watchEffect } from 'vue'
+import { type Order } from '@/assets/interfaces'
 
-  const props = defineProps<{
-    order: Order;
-    uncheck: (order: Order, check: boolean) => void;
-  }>();
+const props = defineProps<{
+  orderId: number
+}>()
 
-  const isChecked = ref(true);
+const orderStore = useOrderStore()
+const setDone = orderStore.doneOrder
+//const filteredOrders = ref(orderStore.getFilteredOrders.done);
 
-  /*const uncheckOrder = ((id: Order) => {
-    if(!isChecked){
-      props.doneOrders.values.delete(id);
-      id.time_done = null;
-    }
+/*watchEffect(() => {
+    filteredOrders.value = orderStore.getFilteredOrders.done;
   })*/
 
+/*const uncheck = (() => {
+    console.log("entered uncheck");
+    console.log("entered if");
+    setDone(props.orderId-1, false);
+  })*/
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

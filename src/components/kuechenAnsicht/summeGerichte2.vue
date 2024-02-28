@@ -1,25 +1,37 @@
 <template>
-  <h2>Übersicht aller Gerichte</h2>
-  <div>
-    <div v-for="[key, value] in sumMap" :key="key">
-      <span>{{ value }}x {{ key }}</span>
+    <h2>Übersicht aller Gerichte</h2>
+    <div>
+        <div v-for="[key, value] in sumMap" :key="key">
+            <span id="sum">{{ value }}x {{ key }}</span>
+        </div>
     </div>
-  </div>
 </template>
 
-<style scoped></style>
-
 <script setup lang="ts">
-import { useOrderStore } from '@/stores/orderStore'
-import { ref, reactive, watch, watchEffect, provide } from 'vue'
-import { type Order } from '@/assets/interfaces'
+    import { useOrderStore } from '@/stores/orderStore';
+    import { ref, reactive, watch, watchEffect, computed } from 'vue';
+    import { type Order } from '@/assets/interfaces';
+    
+    const orderStore = useOrderStore();
+    const orders = ref(orderStore.getFilteredOrders);
 
-const orderStore = useOrderStore()
-const orders = ref(orderStore.getFilteredOrders)
-let orderCount: number = -1
-const sumMap = ref(new Map<string, number>())
+    const sumMap = computed(() => {
+        const newMap = new Map<string, number>;
+            orders.value.open.forEach((order: Order) => {
+            for(const items of order.order_items){
+                const itemName = items.item.name;
+                const currentCount = newMap.get(itemName);
+                newMap.set(itemName, items.count + (currentCount ?? 0));
+            }
+        })
+        return newMap;
+    })
 
-/*watch(orders.value, (newOrder) => {
+    watchEffect(() =>{
+        orders.value = orderStore.getFilteredOrders;
+    })
+
+    /*watch(orders.value, (newOrder) => {
         console.log(orderCount);
         console.log(newOrder.length);
         const latestOrder = newOrder[newOrder.length - 1];
@@ -45,7 +57,11 @@ const sumMap = ref(new Map<string, number>())
                 sumMap.value.set(key, (x-y) ?? 0);
             }
         })*/
-//});
-
-//provide('sumMap', sumMap);
+    //});
 </script>
+
+<style scoped>
+    #sum {
+        font-size: 20pt;
+    }
+</style>
