@@ -16,7 +16,7 @@
           <div id="back">
             <h3>Zurückholen</h3>
             <div v-for="order in doneOrders" :key="order.id"> 
-              <FertigeBestellung :order="order" :uncheck="uncheckOrder" />
+              <FertigeBestellung :orderId="order.id" />
             </div>
           </div>
         </div>
@@ -31,34 +31,23 @@
 
   const orderStore = useOrderStore();
   const orders = ref(orderStore.getOrders);
-  const doneOrders = ref(new Set<Order>());
+  //const doneOrders = ref(new Set<Order>());
+  const doneOrders = ref(orderStore.getFilteredOrders.done);
+  const setDone = ref(orderStore.doneOrder);
   const isChecked = ref(true);
 
   //const sumMap = ref(inject('sumMap', null));
 
   watchEffect(() => {
-    orders.value.forEach((order) => {
-      if(order.time_done && !order.time_gone){
-        /*if(doneOrders.value.size > 4){
-          doneOrders.value.
-        }*/
-        doneOrders.value.add(order);
-        
-        /*for(const item of order.order_items){
-          if(sumMap){
-            let current: number = sumMap.get(item.item.name);
-            sumMap.set(item.item.name, current - item.count);
-          }
-        }*/
-      }
-    })
+    doneOrders.value = orderStore.getFilteredOrders.done;
   })
 
-  function uncheckOrder(id: Order, check: boolean): void {
+  function uncheckOrder(order: Order, check: boolean): void {
     console.log("ENTERED");
     if(!check){
-      doneOrders.value.delete(id);
-      id.time_done = null;
+      setDone.value(order.id, check);
+      //doneOrders.value.delete(id);
+      //id.time_done = null;
     }
   }
 

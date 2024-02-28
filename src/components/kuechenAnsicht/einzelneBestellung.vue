@@ -54,10 +54,6 @@
     })
 
     watch(() => minutes.value, (n, o) => {
-        console.log("MINUTES: ");
-        console.log(o);
-        console.log(n);
-        
         if(n >= 2 && n < 4){
             backgroundColor.value = '#FFC107';
         } else if(n >= 4){
@@ -68,7 +64,7 @@
     const checkOrder = (() => {
         if(isChecked){
             //stopTimer = true;
-            setDone(props.orderId-1, true);
+            setDone(props.orderId-1);
         }
     })
 
