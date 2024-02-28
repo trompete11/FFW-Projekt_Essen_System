@@ -37,7 +37,6 @@ export default {
         updateFormattedTime() {
             const { time_done } = this.order;
             if (time_done) {
-                console.log(time_done);
                 const Time = new Date(time_done);
                 const currentTime = new Date();
                 const difference = currentTime.getTime() - Time.getTime();

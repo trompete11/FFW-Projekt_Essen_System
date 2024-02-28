@@ -10,11 +10,11 @@
       <span style="margin-left: 25px;">
         <button class="button" @click="handleFilterBack">Bestellung(en) zurückholen</button>
       </span>
-      <span style="margin-left: 100px;">
-        Ansicht
+      <span style="margin-left: 200px;">
+        Auslastung:
       </span>
-      <span style="margin-left: 25px;">
-        <!-- <queue></queue> -->
+      <span>
+        <queue></queue>
       </span>
     </div>
     <div style="margin-top: 15px;">

@@ -8,7 +8,7 @@ import Heading from '@/components/BaseHeading.vue'
     <header class="row heading">
       <Heading>
         <template #logo>
-          <img alt="Vue logo" class="logo" src="@/assets/logo.svg" />
+          <img alt="Vue logo" class="logo" src="@/assets/eat.png" />
         </template>
         <template #heading>JRK Verpflegungssystem</template>
         <template #subheading>

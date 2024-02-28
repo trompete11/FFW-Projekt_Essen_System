@@ -6,69 +6,64 @@
     </div>
 </template>
 
-<!-- <script>
+<script>
+import { ref, watch } from 'vue';
 import { useOrderStore } from '@/stores/orderStore';
 import config from '@/components/ausgabeAnsicht/configAusgabeAnsicht.js';
 
 export default {
-    data() {
-        return {
-            empty: config.empty,
-            medium: config.medium,
-            full: config.full
-        }
-    },
-    /* setup() {
+    setup() {
         const orderStore = useOrderStore();
-        const orders = orderStore.getOrders;
-        const orderCount = orders.length;
-    }, */
-    props: ['activeLight'],
-    methods: {
-        switchLight() {
-            if (config.empty === length(orders)) {
-                return
-            } else if (config.medium === ) {
-                return
-            } else if (config.full === ) {
-                return
+        const activeLight = ref('green');
+
+        watch(() => orderStore.getOrders, (newValue) => {
+            const orderCount = newValue.length;
+            if (orderCount === config.full) {
+                activeLight.value = 'red';
+            } else if (orderCount === config.medium) {
+                activeLight.value = 'yellow';
+            } else {
+                activeLight.value = 'green';
             }
-        }
+        });
+
+        return { activeLight };
     }
 }
 </script>
 
 <style scoped>
 .traffic-light {
-    width: 100px;
-    height: 300px;
+    width: 140px;
+    height: 40px;
     background-color: #333;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
+    border-radius: 6px;
+    display: inline-flex;
     justify-content: space-around;
     align-items: center;
 }
 
 .light {
-    width: 80px;
-    height: 80px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
+    background-color: white;
+    transition: opacity 0.3s ease;
 }
 
-.red {
+.red.active {
     background-color: red;
 }
 
-.yellow {
+.yellow.active {
     background-color: yellow;
 }
 
-.green {
+.green.active {
     background-color: green;
 }
 
-.active {
-    border: 5px solid #fff;
+.light:not(.active) {
+    opacity: 0.5;
 }
-</style> -->
+</style>
