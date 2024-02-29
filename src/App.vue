@@ -15,10 +15,10 @@ import Heading from '@/components/BaseHeading.vue'
         </template>
         <template #heading>JRK Verpflegungssystem</template>
         <template #subheading>
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/bestellung">Bestellung</RouterLink>
-          <RouterLink to="/kueche">Küche</RouterLink>
-          <RouterLink to="/ausgabe">Ausgabe</RouterLink>
+          <RouterLink to="/">Home </RouterLink>
+          <RouterLink to="/bestellung">Bestellung </RouterLink>
+          <RouterLink to="/kueche">Küche </RouterLink>
+          <RouterLink to="/ausgabe">Ausgabe </RouterLink>
         </template>
         <template #uhr>{{ uhrzeit }}</template>
       </Heading>
