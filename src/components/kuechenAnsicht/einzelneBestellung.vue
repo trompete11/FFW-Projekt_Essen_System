@@ -1,17 +1,19 @@
+<!-- Author: Emre Burak Koc -->
+<!-- Component for displaying single orders -->
 <template>
   <div class="order" :style="{ backgroundColor: backgroundColor }">
-    <div class="checkbox">
+    <div class="checkbox"> <!-- only display checkbox when order is not done  -->
       <input v-if="!orders[orderId-1].time_done" type="checkbox" v-model="isChecked" @change="setDone(props.orderId-1)" />
-    </div>
+    </div> <!-- displaying all order details -->
     <div class="order-details">
       <span>Nr. #{{ orderId }}</span>
       <div v-for="item in ords" :key="ords.indexOf(item)">
         <span>{{ item.count }}x {{ item.item.name }}
           <span v-for="extra in item.extras" :key="extra.id"> / {{ extra.name }}</span></span>
-        <span v-if="item.comment"> / Comment: {{ item.comment }}</span>
+        <span v-if="item.comment"> / Comment: {{ item.comment }}</span> <!-- display if comment exists -->
       </div>
     </div>
-    <div class="timer">
+    <div class="timer"> <!-- displaying timer, formatting with preset 0 -->
       <span v-if="seconds < 10">{{ minutes }}:0{{ seconds }}</span>
       <span v-else>{{ minutes }}:{{ seconds }}</span>
     </div>
