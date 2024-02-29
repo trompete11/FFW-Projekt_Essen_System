@@ -35,8 +35,8 @@ const orders = ref(orderStore.getOrders)
 const setDone = orderStore.doneOrder
 
 // variables for timer
-const seconds = ref(new Date().getSeconds() - new Date(orders.value[props.orderId-1].time_in).getSeconds())
-const minutes = ref(new Date().getMinutes() - new Date(orders.value[props.orderId-1].time_in).getMinutes())
+const seconds = ref(Math.abs(new Date().getSeconds() - new Date(orders.value[props.orderId-1].time_in).getSeconds()))
+const minutes = ref(Math.abs(new Date().getMinutes() - new Date(orders.value[props.orderId-1].time_in).getMinutes()))
 const isChecked = ref(false)
 const backgroundColor = ref('#4CAF50')
 
