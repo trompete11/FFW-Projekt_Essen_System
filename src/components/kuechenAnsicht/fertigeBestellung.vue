@@ -9,10 +9,12 @@
 import { useOrderStore } from '@/stores/orderStore'
 import { ref, reactive, watchEffect } from 'vue'
 
+// defining properties 
 const props = defineProps<{
   orderId: number
 }>()
 
+// getting state of done orders 
 const orderStore = useOrderStore()
 const setDone = orderStore.doneOrder
 </script>
