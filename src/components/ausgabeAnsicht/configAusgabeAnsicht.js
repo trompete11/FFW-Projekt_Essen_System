@@ -1,3 +1,4 @@
+// Erstellt von Fabian M
 // configAusgabeAnsicht.js
 
 export default {

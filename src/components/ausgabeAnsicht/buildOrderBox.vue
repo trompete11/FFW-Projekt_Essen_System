@@ -1,12 +1,19 @@
+<!-- Erstellt von Fabian M -->
+
 <template>
+    <!-- Container für die Bestellübersicht mit dynamischer Klasse -->
     <div class="order-box" :class="statusDetection(order)">
+        <!-- Kopfzeile der Bestellung -->
         <div class="order-header">
+            <!-- Anzeige der Bestellnummer -->
             <h2>#{{ order.id }}</h2>
+            <!-- Anzeige von Bestellzeiten und Bearbeitungsdauer -->
             <div class="order-dates">
                 <p class="order-time">Bestellzeit: {{ formatTime(order.time_in) }}</p>
                 <p class="order-time">In Bearbeitung seit: {{ formattedTime }}</p>
             </div>
         </div>
+        <!-- Anzeige der Bestellpositionen -->
         <div class="order-items">
             <ausgabeOrder :order-items="order.order_items" />
         </div>
@@ -25,15 +32,18 @@ export default {
             formattedTime: ''
         };
     },
+    // Beim Laden der Komponente die formatierte Zeit aktualisieren und fortlaufend aktualisieren
     mounted() {
         this.updateFormattedTime();
         setInterval(this.updateFormattedTime, 1000);
     },
     methods: {
+        // Methode zur Formatierung von Zeitangaben
         formatTime(timeString) {
             const time = new Date(timeString);
             return time.toLocaleString();
         },
+        // Methode zur Statuserkennung und Zuweisung der entsprechenden CSS-Klasse
         statusDetection(order) {
             if (order.time_gone === null && order.time_done === null) {
                 return "In-Bearbeitung";
@@ -41,6 +51,7 @@ export default {
                 return "Undefiniert";
             }
         },
+        // Methode zur Aktualisierung der formatierten Zeit
         updateFormattedTime() {
             const { time_in } = this.order;
             if (time_in) {
@@ -64,6 +75,7 @@ export default {
 </script>
 
 <style scoped>
+/* Stildefinitionen für die verschiedenen Status */
 .order-box.In-Bearbeitung {
     background-color: #fd9948;
 }
@@ -72,6 +84,7 @@ export default {
     background-color: #ff6060;
 }
 
+/* Allgemeine Stildefinitionen */
 .order-box {
     border-radius: 6px;
     padding: 5px;

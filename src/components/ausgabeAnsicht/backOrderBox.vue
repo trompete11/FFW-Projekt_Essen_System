@@ -1,13 +1,20 @@
+<!-- Erstellt von Fabian M -->
+
 <template>
+    <!-- Container für die Bestellübersicht -->
     <div class="order-box">
+        <!-- Kopfzeile der Bestellung -->
         <div class="order-header">
+            <!-- Anzeige der Bestellnummer -->
             <h2>#{{ order.id }}</h2>
+            <!-- Anzeige von Bestellzeiten und Status -->
             <div class="order-dates">
                 <p class="order-time">Bestellzeit: {{ formatTime(order.time_in) }}</p>
                 <p class="order-time">Auslieferungsdatum: {{ formatTime(order.time_gone) }}</p>
                 <p class="order-time">Status: {{ "Ausgeliefert" }}</p>
             </div>
         </div>
+        <!-- Anzeige der Bestellpositionen -->
         <div class="order-items">
             <ausgabeOrder :order-items="order.order_items" />
         </div>
@@ -22,6 +29,7 @@ export default {
         order: Object
     },
     methods: {
+        // Methode zur Formatierung von Zeitangaben
         formatTime(timeString) {
             const time = new Date(timeString);
             return time.toLocaleString();

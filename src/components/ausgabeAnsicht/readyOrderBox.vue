@@ -1,12 +1,19 @@
+<!-- Erstellt von Fabian M -->
+
 <template>
+    <!-- Container für die Bestellübersicht -->
     <div class="order-box">
+        <!-- Kopfzeile der Bestellung -->
         <div class="order-header">
+            <!-- Anzeige der Bestellnummer -->
             <h2>#{{ order.id }}</h2>
+            <!-- Anzeige von Bestellzeiten -->
             <div class="order-dates">
                 <p class="order-time">Bestellzeit: {{ formatTime(order.time_in) }}</p>
                 <p class="order-time">Abholbereit seit: {{ formattedTime }}</p>
             </div>
         </div>
+        <!-- Anzeige der Bestellpositionen -->
         <div class="order-items">
             <ausgabeOrder :order-items="order.order_items" />
         </div>
@@ -26,14 +33,17 @@ export default {
         };
     },
     mounted() {
+        // Aktualisierung der formatierten Zeit bei Komponentenmontage und fortlaufend
         this.updateFormattedTime();
         setInterval(this.updateFormattedTime, 1000);
     },
     methods: {
+        // Methode zur Formatierung der Zeit
         formatTime(timeString) {
             const time = new Date(timeString);
             return time.toLocaleString();
         },
+        // Methode zur Aktualisierung der formatierten Zeit
         updateFormattedTime() {
             const { time_done } = this.order;
             if (time_done) {
@@ -57,31 +67,32 @@ export default {
 </script>
 
 <style scoped>
+/* Stildefinitionen für die Bestellbox */
 .order-box {
     padding: 5px;
     margin-bottom: 10px;
     max-width: 500px;
 }
 
+/* Stildefinitionen für die Kopfzeile der Bestellung */
 .order-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+/* Stildefinitionen für die Bestellnummer */
 .order-header h2 {
     margin: 0;
     font-size: 30px;
 }
 
+/* Stildefinitionen für die Bestellzeiten */
 .order-dates {
     font-size: 12px;
 }
 
-.order-time {
-    margin: 0;
-}
-
+/* Stildefinitionen für die Bestellpositionen */
 .order-items ul {
     padding-left: 15px;
 }

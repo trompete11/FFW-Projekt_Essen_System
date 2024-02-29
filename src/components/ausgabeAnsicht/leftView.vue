@@ -1,6 +1,11 @@
+<!-- Erstellt von Fabian M -->
+
 <template>
+    <!-- Container für die Bestellübersicht -->
     <div class="orders-container">
+        <!-- Schleife durch die gefilterten Bestellungen -->
         <li v-for="order in filteredOrders" :key="order.id" class="order-item">
+            <!-- Anzeige der Bestellung basierend auf dem ausgewählten Filter -->
             <template v-if="filterSelection === 'ready'">
                 <readyOrderBox :order="order" @click="handleOrderClick(order)" />
             </template>
@@ -29,16 +34,21 @@ import backOrderBox from '@/components/ausgabeAnsicht/backOrderBox.vue';
 export default {
     data() {
         return {
+            // Importierte Konfigurationswerte für Bestelltypen
             shortOrderT: config.shortOrderT,
             mediumOrderT: config.mediumOrderT,
             longOrderT: config.longOrderT
         }
     },
+    // Definition des Prop 'filterSelection'
     props: ['filterSelection'],
     setup(props) {
+        // Verwendung des Bestellenspeichers aus einer Store-Instanz
         const orderStore = useOrderStore();
+        // Zugriff auf die Liste der Bestellungen aus dem Store
         const orders = orderStore.orders;
 
+        // Berechnete Eigenschaft für die gefilterten Bestellungen basierend auf dem ausgewählten Filter
         const filteredOrders = computed(() => {
             if (props.filterSelection === 'ready') {
                 return orderStore.getFilteredOrders.oDone;
@@ -51,23 +61,27 @@ export default {
             }
         });
 
+        // Methode zum Behandeln von Klicks auf Bestellungen
         const handleOrderClick = (order) => {
             if (order.time_gone === null) {
                 orderStore.goneOrder(order.id - 1);
             }
         };
 
+        // Methode zum Behandeln von Klicks auf Bestellungen zum Zurückholen
         const handleOrderClickBack = (order) => {
             orderStore.goneOrder(order.id - 1, false);
         }
 
         return {
+            // Rückgabe der erforderlichen Daten und Methoden
             orders,
             filteredOrders,
             handleOrderClick,
             handleOrderClickBack
         };
     },
+    // Registrierung der Bestellungs-Komponenten
     components: {
         readyOrderBox,
         buildOrderBox,
@@ -78,6 +92,7 @@ export default {
 </script>
 
 <style scoped>
+/* Stildefinitionen für den Container der Bestellungen */
 .orders-container {
     border-radius: 6px;
     display: flex;
@@ -87,6 +102,7 @@ export default {
     gap: 10px;
 }
 
+/* Stildefinitionen für einzelne Bestellungsitems */
 .order-item {
     border-radius: 6px;
     background-color: #afd7a4;
@@ -96,6 +112,7 @@ export default {
     cursor: pointer;
 }
 
+/* Stildefinitionen für das Hovern über Bestellungsitems */
 .order-item:hover {
     background-color: #b98080;
 }
