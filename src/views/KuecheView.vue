@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Küche</h1>
-    <button @click="addData">Add data</button>
+    <!--<button @click="addData">Add data</button> to add Test Data for Debug -->
     <select v-model="filter" id="combo">
       <option value="open">Offene Bestellungen</option>
       <option value="done">Fertige Bestellungen</option>
