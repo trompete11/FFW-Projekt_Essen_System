@@ -1,7 +1,7 @@
 <template>
   <div class="order" :style="{ backgroundColor: backgroundColor }">
     <div class="checkbox">
-      <input v-if="!orders[orderId-1].time_done" type="checkbox" v-model="isChecked" @change="setDone(props.orderId-1, isChecked)" />
+      <input v-if="!orders[orderId-1].time_done" type="checkbox" v-model="isChecked" @change="setDone(props.orderId-1)" />
     </div>
     <div class="order-details">
       <span>Nr. #{{ orderId }}</span>
@@ -23,11 +23,13 @@ import { type OrderItem } from '@/assets/interfaces'
 import { useOrderStore } from '@/stores/orderStore'
 import { ref, onMounted, watch } from 'vue'
 
-// define property for input of orders
+// define property for input of orders and its id
 const props = defineProps<{
   ords: OrderItem[]
   orderId: number
 }>()
+
+// getting states and necessary methods from order state  
 const orderStore = useOrderStore()
 const orders = ref(orderStore.getOrders)
 const setDone = orderStore.doneOrder
@@ -36,7 +38,6 @@ const setDone = orderStore.doneOrder
 const seconds = ref(new Date().getSeconds() - new Date(orders.value[props.orderId-1].time_in).getSeconds())
 const minutes = ref(new Date().getMinutes() - new Date(orders.value[props.orderId-1].time_in).getMinutes())
 const isChecked = ref(false)
-let stopTimer: boolean = false
 const backgroundColor = ref('#4CAF50')
 
 const startTimer = () => {
@@ -51,6 +52,7 @@ const startTimer = () => {
   }, 1000)
 }
 
+// observing minutes for changing colors of single order
 watch(() => minutes.value,(n, o) => {
     if (n >= 2 && n < 4) {
       backgroundColor.value = '#FFC107'
@@ -59,13 +61,6 @@ watch(() => minutes.value,(n, o) => {
     }
   }
 )
-
-const checkOrder = () => {
-  if (isChecked) {
-    //stopTimer = true;
-    setDone(props.orderId - 1)
-  }
-}
 
 onMounted(() => {
   startTimer()
