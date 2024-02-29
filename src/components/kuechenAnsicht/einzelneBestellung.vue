@@ -28,21 +28,20 @@ const props = defineProps<{
   ords: OrderItem[]
   orderId: number
 }>()
-
 const orderStore = useOrderStore()
 const orders = ref(orderStore.getOrders)
 const setDone = orderStore.doneOrder
 
 // variables for timer
-const seconds = ref(0)
-const minutes = ref(0)
+const seconds = ref(new Date().getSeconds() - new Date(orders.value[props.orderId-1].time_in).getSeconds())
+const minutes = ref(new Date().getMinutes() - new Date(orders.value[props.orderId-1].time_in).getMinutes())
 const isChecked = ref(false)
 let stopTimer: boolean = false
 const backgroundColor = ref('#4CAF50')
 
 const startTimer = () => {
   const interval = setInterval(() => {
-    if (!stopTimer) {
+    if (!orders.value[props.orderId-1].time_done) {
       seconds.value++
       if (seconds.value == 60) {
         seconds.value = 0
