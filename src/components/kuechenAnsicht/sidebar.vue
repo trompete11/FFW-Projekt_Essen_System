@@ -36,8 +36,6 @@ const doneOrders = ref(orderStore.getFilteredOrders.done)
 const setDone = ref(orderStore.doneOrder)
 const isChecked = ref(true)
 
-//const sumMap = ref(inject('sumMap', null));
-
 watchEffect(() => {
   doneOrders.value = orderStore.getFilteredOrders.done
 })

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!orderStore.getOrders[props.orderId - 1].time_gone">
     <input type="checkbox" @change="setDone(props.orderId - 1, false)" checked />
     <span> Nr. #{{ props.orderId }}</span>
   </div>
@@ -8,7 +8,6 @@
 <script setup lang="ts">
 import { useOrderStore } from '@/stores/orderStore'
 import { ref, reactive, watchEffect } from 'vue'
-import { type Order } from '@/assets/interfaces'
 
 const props = defineProps<{
   orderId: number
@@ -16,17 +15,6 @@ const props = defineProps<{
 
 const orderStore = useOrderStore()
 const setDone = orderStore.doneOrder
-//const filteredOrders = ref(orderStore.getFilteredOrders.done);
-
-/*watchEffect(() => {
-    filteredOrders.value = orderStore.getFilteredOrders.done;
-  })*/
-
-/*const uncheck = (() => {
-    console.log("entered uncheck");
-    console.log("entered if");
-    setDone(props.orderId-1, false);
-  })*/
 </script>
 
 <style scoped></style>
