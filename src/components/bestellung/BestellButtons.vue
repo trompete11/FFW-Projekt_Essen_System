@@ -1,3 +1,6 @@
+<!-- 
+  Author: Lucas Höttler
+ -->
 <script setup lang="ts">
 import type { ButtonGrid, ButtonSite } from '@/assets/bestellInterfaces'
 import type { FoodItem, OrderItem } from '@/assets/interfaces'

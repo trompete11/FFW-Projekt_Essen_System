@@ -1,3 +1,6 @@
+<!-- 
+  Author: Lucas Höttler
+ -->
 <script setup lang="ts">
 defineProps<{
   container: any

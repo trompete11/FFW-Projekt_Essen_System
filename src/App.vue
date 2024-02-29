@@ -1,3 +1,6 @@
+<!-- 
+  Author: Lucas Höttler
+ -->
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import Heading from '@/components/BaseHeading.vue'

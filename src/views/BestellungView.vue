@@ -1,3 +1,6 @@
+<!-- 
+  Author: Lucas Höttler
+ -->
 <script lang="ts" setup>
 import BestellButtons from '@/components/bestellung/BestellButtons.vue'
 import Button from '@/components/bestellung/ButtonBase.vue'

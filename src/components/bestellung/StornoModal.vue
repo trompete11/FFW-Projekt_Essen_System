@@ -1,3 +1,6 @@
+<!-- 
+  Author: Lucas Höttler
+ -->
 <script setup lang="ts">
 import Modal from '@/components/bestellung/BaseModal.vue'
 import Button from '@/components/bestellung/ButtonBase.vue'

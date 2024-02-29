@@ -1,3 +1,6 @@
+<!-- 
+  Author: Lucas Höttler
+ -->
 <script setup lang="ts">
 import type { BestellButtonData } from '@/assets/bestellInterfaces'
 import type { FoodItem } from '@/assets/interfaces'

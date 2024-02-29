@@ -1,3 +1,6 @@
+<!-- 
+  Author: Lucas Höttler
+ -->
 <template>
   <div class="heading-logo">
     <div class="col">

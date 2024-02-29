@@ -1,3 +1,6 @@
+/*
+  Author: Lucas Höttler
+*/
 import type { FoodItem } from '@/assets/interfaces'
 
 export interface ButtonData {

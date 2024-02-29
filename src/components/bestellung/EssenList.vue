@@ -1,3 +1,6 @@
+<!-- 
+  Author: Lucas Höttler
+ -->
 <script lang="ts" setup>
 import type { OrderItem } from '@/assets/interfaces'
 import { onBeforeUpdate } from 'vue'
@@ -19,7 +22,7 @@ onBeforeUpdate(() => {
       <span></span><br />
       <span v-if="item.comment !== ''">{{ item.comment }}</span>
     </div>
-    <div class="col-2 price">
+    <div class="col-1 price">
       {{
         Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(
           item.price_sum * item.count

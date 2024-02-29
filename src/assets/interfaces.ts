@@ -1,3 +1,6 @@
+/*
+  Author: Lucas Höttler
+*/
 export interface FoodItem {
   id: number
   name: string
