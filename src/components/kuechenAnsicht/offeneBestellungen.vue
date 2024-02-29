@@ -1,17 +1,13 @@
 <template>
   <div id="order-container">
     <div v-if="selection == 'open'">
-      <div>
-        <h2>Offene Bestellungen: {{ orderStore.getFilteredOrders.open.length }}</h2>
-      </div>
+      <h2>Offene Bestellungen: {{ orderStore.getFilteredOrders.open.length }}</h2>
       <div v-for="order in filteredOrders.open" :key="order.id">
         <EinzelBestellung :orderId="order.id" :ords="order.order_items" />
       </div>
     </div>
     <div v-else>
-      <div>
-        <h2>Fertige Bestellungen: {{ orderStore.getFilteredOrders.done.length }}</h2>
-      </div>
+      <h2>Fertige Bestellungen: {{ orderStore.getFilteredOrders.done.length }}</h2>
       <div v-for="order in filteredOrders.done" :key="order.id">
         <EinzelBestellung :order-id="order.id" :ords="order.order_items" />
       </div>
@@ -29,11 +25,9 @@ const props = defineProps<{
 }>()
 
 const orderStore = useOrderStore()
-const orders = ref(orderStore.getOrders)
 const filteredOrders = ref(orderStore.getFilteredOrders)
 
 watchEffect(() => {
-  //orders.value = orderStore.getOrders;
   filteredOrders.value = orderStore.getFilteredOrders
 })
 </script>
