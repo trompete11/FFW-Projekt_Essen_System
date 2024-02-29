@@ -27,6 +27,7 @@ export const useOrderStore = defineStore('orderStore', () => {
       orders.value[orderId].time_done = Date()
     } else {
       orders.value[orderId].time_done = null
+      orders.value[orderId].time_gone = null
     }
   }
 
