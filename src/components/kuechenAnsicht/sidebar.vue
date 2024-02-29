@@ -1,7 +1,9 @@
+<!-- Author: Emre Burak Koc -->
+<!-- Component for sidebar to display queue and done orders -->
 <template>
   <div id="sidebar-right">
     <div id="vertical-flex-container">
-      <div id="queue">
+      <div id="queue"> <!-- queue is onyl visually realized without functionality, template for use in future -->
         <h2>Warteschlange</h2>
         <div id="red-queue">
           <span>ROT</span>
@@ -14,7 +16,7 @@
         </div>
       </div>
       <div id="back">
-        <h3>Zurückholen</h3>
+        <h3>Zurückholen</h3> <!-- done orders for resetting -->
         <div v-for="order in doneOrders" :key="order.id">
           <FertigeBestellung :orderId="order.id" />
         </div>
