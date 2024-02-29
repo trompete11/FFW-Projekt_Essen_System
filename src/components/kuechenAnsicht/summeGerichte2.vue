@@ -1,6 +1,8 @@
+<!-- Author: Emre Burak Koc -->
+<!-- Component for sum of all dishes -->
 <template>
     <h2>Übersicht aller Gerichte</h2>
-    <div>
+    <div> <!-- iterating over all dishes and its count in sumMap -->
         <div v-for="[key, value] in sumMap" :key="key">
             <span id="sum">{{ value }}x {{ key }}</span>
         </div>
@@ -11,10 +13,15 @@
     import { useOrderStore } from '@/stores/orderStore';
     import { ref, reactive, watch, watchEffect, computed } from 'vue';
     import { type Order } from '@/assets/interfaces';
-    
+
+    // getting states of all orders
     const orderStore = useOrderStore();
     const orders = ref(orderStore.getFilteredOrders);
 
+    // sumMap stores the count of all single dishes
+    // sumMap is updated by iterating ove rall done orders
+    // if the key does not exist, the count is added to 
+    // else the previous value of is added to the new value
     const sumMap = computed(() => {
         const newMap = new Map<string, number>;
             orders.value.open.forEach((order: Order) => {
@@ -27,37 +34,10 @@
         return newMap;
     })
 
+    // updating orders
     watchEffect(() =>{
         orders.value = orderStore.getFilteredOrders;
     })
-
-    /*watch(orders.value, (newOrder) => {
-        console.log(orderCount);
-        console.log(newOrder.length);
-        const latestOrder = newOrder[newOrder.length - 1];
-        if(latestOrder && newOrder.length > orderCount){
-            orderCount++;
-            if(newOrder.length == orderCount){ // work around
-                orderCount--;
-                return;
-            }
-            for (const item of latestOrder.order_items) {
-                const itemName = item.item.name;
-                console.log(itemName);
-                sumMap.value.set(itemName, item.count + (sumMap.value.get(itemName) ?? 0));
-            }
-        }
-
-        // drin lassen für spätere Problemerklärung in Doku
-        /*const commonKeys = Array.from(newMap.keys()).filter(key => oldMap.has(key));
-        commonKeys.forEach((key: string) => {
-            if(om != undefined && nm != undefined){
-                let x: number = nm.get(key);
-                let y: number = om.get(key);
-                sumMap.value.set(key, (x-y) ?? 0);
-            }
-        })*/
-    //});
 </script>
 
 <style scoped>
