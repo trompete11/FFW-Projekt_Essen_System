@@ -27,27 +27,19 @@
 import { useOrderStore } from '@/stores/orderStore'
 import { ref, reactive, watchEffect, inject } from 'vue'
 import { type Order } from '@/assets/interfaces'
-import FertigeBestellung from '@/components/kuechenAnsicht/fertigeBestellung.vue'
+import FertigeBestellung from '@/components/kuechenAnsicht/fertigeBestellung.vue' // component for done orders
 
+// getting state of all orders and doneOrder for setting time_done
 const orderStore = useOrderStore()
 const orders = ref(orderStore.getOrders)
-//const doneOrders = ref(new Set<Order>());
 const doneOrders = ref(orderStore.getFilteredOrders.done)
 const setDone = ref(orderStore.doneOrder)
 const isChecked = ref(true)
 
+// updating done orders
 watchEffect(() => {
   doneOrders.value = orderStore.getFilteredOrders.done
 })
-
-function uncheckOrder(order: Order, check: boolean): void {
-  console.log('ENTERED')
-  if (!check) {
-    setDone.value(order.id, check)
-    //doneOrders.value.delete(id);
-    //id.time_done = null;
-  }
-}
 </script>
 
 <style scoped>
