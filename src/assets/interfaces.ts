@@ -1,15 +1,21 @@
+/*
+  Author: Lucas Höttler
+*/
 export interface FoodItem {
   id: number
   name: string
+  description?: string | null
+  price: number
+  extra: boolean
   price: number
 }
 
 export interface OrderItem {
   count: number
   price_sum: number
-  comment: string | null
+  comment?: string | null
   item: FoodItem
-  extras: FoodItem[] | null
+  extras: FoodItem[]
 }
 
 export interface Order {
@@ -18,4 +24,5 @@ export interface Order {
   time_done: string | null
   time_gone: string | null
   order_items: OrderItem[]
+  price_sum: number
 }

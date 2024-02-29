@@ -1,3 +1,6 @@
+<!-- 
+  Author: Lucas Höttler
+ -->
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import Heading from '@/components/BaseHeading.vue'
@@ -45,7 +48,7 @@ export default {
 
 function timeFormat() {
   let date2 = new Date()
-  let h = date2.getHours() - 1
+  let h = date2.getHours()
   let m = date2.getMinutes()
   let s = date2.getSeconds()
   let hs = '' + h

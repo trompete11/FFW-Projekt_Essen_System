@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { useOrderStore } from '@/stores/orderStore'
+
+const orderStore = useOrderStore()
+</script>
 <template>
   <div>
     <h1>Küche</h1>
