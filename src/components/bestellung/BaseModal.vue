@@ -1,5 +1,6 @@
 <!-- 
   Author: Lucas Höttler
+  basis eines PopUp fensters
  -->
 <script setup lang="ts">
 defineProps<{

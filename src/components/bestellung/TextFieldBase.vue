@@ -1,5 +1,7 @@
 <!-- 
   Author: Lucas Höttler
+  Basis eines TextFeldes mit Clear button
+  Design noch fehlerhaft Button+Feld haben nicht die passende breite.
  -->
 <script setup lang="ts">
 import type { BestellButtonData } from '@/assets/bestellInterfaces'

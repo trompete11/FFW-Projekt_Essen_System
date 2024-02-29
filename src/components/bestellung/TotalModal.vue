@@ -1,5 +1,7 @@
 <!-- 
   Author: Lucas Höttler
+  Popup für das abschließen einer Bestellung 
+  zeigt gesamte bestellung an
  -->
 <script setup lang="ts">
 import type { ButtonData } from '@/assets/bestellInterfaces'

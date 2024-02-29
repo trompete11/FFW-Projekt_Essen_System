@@ -1,5 +1,6 @@
 <!-- 
   Author: Lucas Höttler
+  Basismodell eines Buttons mit eigenen Daten
  -->
 <script setup lang="ts">
 import type { ButtonData } from '@/assets/bestellInterfaces'

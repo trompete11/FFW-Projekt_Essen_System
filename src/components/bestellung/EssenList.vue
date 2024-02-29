@@ -1,5 +1,6 @@
 <!-- 
   Author: Lucas Höttler
+  Listet alle OrderItems der aktuellen bestellung mit allen extras auf
  -->
 <script lang="ts" setup>
 import type { OrderItem } from '@/assets/interfaces'

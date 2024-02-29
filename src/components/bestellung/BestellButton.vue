@@ -1,5 +1,6 @@
 <!-- 
   Author: Lucas Höttler
+  Modell eines Buttons für die Bestellung mit daten für foodItems usw.
  -->
 <script setup lang="ts">
 import type { BestellButtonData } from '@/assets/bestellInterfaces'
@@ -13,13 +14,16 @@ defineEmits(['click', 'siteChange', 'addClick'])
 </script>
 
 <template>
-  <Button
+  <!-- Eigene Button Typen -->
+  <!-- Button zum ändern der seite -->
+  <Button 
     v-if="props.btn.btnData.type === 'site'"
     :btn_data="props.btn.btnData"
     @click="$emit('siteChange', props.btn.data)"
   >
     {{ props.btn.data }}
   </Button>
+  <!-- Button zum anfügen des Items an die order -->
   <Button
     v-if="props.btn.btnData.type === 'addButton'"
     :btn_data="props.btn.btnData"
@@ -27,6 +31,7 @@ defineEmits(['click', 'siteChange', 'addClick'])
   >
     {{ props.btn.data }}
   </Button>
+  <!-- Button für ein FoodItem -->
   <Button
     v-else-if="isFoodItem(props.btn.data)"
     :btn_data="props.btn.btnData"

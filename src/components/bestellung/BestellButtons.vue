@@ -1,5 +1,8 @@
 <!-- 
   Author: Lucas Höttler
+  stellt alle Buttons eines Button Grids dar
+  wechselt ziwschen den seiten
+  erstellt ein OrderItem zum anfügen an die bestellung.
  -->
 <script setup lang="ts">
 import type { ButtonGrid, ButtonSite } from '@/assets/bestellInterfaces'
@@ -7,7 +10,7 @@ import type { FoodItem, OrderItem } from '@/assets/interfaces'
 import BestellButton from '@/components/bestellung/BestellButton.vue'
 import { type Ref, ref } from 'vue'
 import TextFieldBase from './TextFieldBase.vue'
-import { isShorthandPropertyAssignment } from 'typescript'
+
 const props = defineProps<{
   buttons: ButtonGrid
 }>()
@@ -20,7 +23,7 @@ const item: Ref<OrderItem> = ref({
   comment: ''
 })
 
-function addFoodItemClick(data: FoodItem) {
+function addFoodItemClick(data: FoodItem) { //fügt FoodItems an der Passenden Stelle zum OrderItem hinzu
   if (data.extra) {
     //falls beilage bereits vorhanden wird dise entfernt
     let index = item.value.extras.findIndex((element: FoodItem) => element.id === data.id)
@@ -37,12 +40,12 @@ function addFoodItemClick(data: FoodItem) {
 
 defineEmits(['click', 'addClick'])
 
-function calcBtnHeightStyle(): string {
+function calcBtnHeightStyle(): string { //berechnet höhe der Buttons um Bildschirm auszufüllen
   if (site.value !== undefined) return 'height: ' + 65 / site.value.buttons.length + 'vh'
   return ''
 }
 
-function changeSite(newSite: string) {
+function changeSite(newSite: string) {  //wechselt Button seite, noch fehlerhat durch vershcwinden der gewählten buttons
   site.value = props.buttons.sites.find((element) => newSite === element.id)
 }
 </script>

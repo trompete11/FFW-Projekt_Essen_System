@@ -16,6 +16,7 @@ import StornoModal from '@/components/bestellung/StornoModal.vue'
 const order: Ref<OrderItem[] | []> = ref([])
 const price_sum: Ref<number> = ref(0)
 
+//Buttons werden definiert sollte eigentlich ausgelagert werden.
 var site: ButtonSite = {
   id: 'Seite 1',
   buttons: [
@@ -128,7 +129,7 @@ const newId = ref(-1)
 
 const orderStore = useOrderStore()
 
-function beilagen_sort(a: any, b: any) {
+function beilagen_sort(a: any, b: any) {  //damit Beilagen immer in gleicher reihenfolge angezeigt werden
   if (a.id < b.id) {
     return -1
   } else if (a.id > b.id) {
@@ -138,7 +139,7 @@ function beilagen_sort(a: any, b: any) {
   return 0
 }
 
-function addItemClick(item: OrderItem) {
+function addItemClick(item: OrderItem) {  //zum anfügen eines OrderItems an die Gesamte Order
   console.log('addItem: ' + JSON.stringify(item))
   if (item.item === null || item.item === undefined) {
     return
@@ -168,7 +169,7 @@ function addItemClick(item: OrderItem) {
   price_sum.value += item.price_sum
 }
 
-function newOrder() {
+function newOrder() { //zum anfügen der order an den store / löscht momentane order hier
   if (order.value.length <= 0) {
     return
   }
@@ -177,7 +178,7 @@ function newOrder() {
   idModal.value = true
 }
 
-function clearOrder() {
+function clearOrder() {// löscht momentane order hier
   order.value = []
   price_sum.value = 0
   //location.reload()
@@ -203,6 +204,7 @@ function clearOrder() {
     </div>
     <div class="row">
       <div class="col col-radio">
+        <!-- zum öffnen des TotalModals-->
         <Button
           :btn_data="{
             type: 'button',
@@ -226,6 +228,7 @@ function clearOrder() {
         >
       </div>
       <div class="col col-radio">
+        <!-- zum öffnen des StornoModals-->
         <Button
           :btn_data="{
             type: 'button',
