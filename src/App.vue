@@ -11,7 +11,7 @@ import Heading from '@/components/BaseHeading.vue'
     <header class="row heading">
       <Heading>
         <template #logo>
-          <img alt="Vue logo" class="logo" src="@/assets/logo.svg" />
+          <img alt="Vue logo" class="logo" src="@/assets/eat.png" />
         </template>
         <template #heading>JRK Verpflegungssystem</template>
         <template #subheading>
@@ -77,10 +77,12 @@ function timeFormat() {
 .logo {
   height: 15vh;
 }
+
 .heading {
   margin-top: 1vh;
   height: 15vh;
 }
+
 .body {
   margin-top: 2vh;
   height: 70vh;

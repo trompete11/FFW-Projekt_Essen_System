@@ -7,6 +7,7 @@ export interface FoodItem {
   description?: string | null
   price: number
   extra: boolean
+  price: number
 }
 
 export interface OrderItem {
