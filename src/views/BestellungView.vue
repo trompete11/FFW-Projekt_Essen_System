@@ -14,33 +14,35 @@ const order: Ref<OrderItem[] | []> = ref([])
 const price_sum: Ref<number> = ref(0)
 
 var site: ButtonSite = {
-  id: 'site1',
+  id: 'Seite 1',
   buttons: [
     [
       {
-        btnData: { id: 's1', type: 'site' },
-        data: 'site1'
+        btnData: { id: 's1', type: 'site', style: "background-color: lightgreen" },
+        data: 'Seite 1'
       },
       {
-        btnData: { id: 's2', type: 'site' },
-        data: 'site2'
+        btnData: { id: 's2', type: 'site', style: "background-color: lightgreen" },
+        data: 'Seite 2'
       }
     ],
     [
       {
-        btnData: { id: 'btn1', type: 'radio', name: 'food' },
+        btnData: { id: 'btn1', type: 'radio', name: 'food', style: "background-color: orange" },
         data: {
           id: 0,
-          name: 'food1',
+          name: 'Pizza',
+          description: "Pizza beschreibung",
           extra: false,
           price: 1
         }
       },
       {
-        btnData: { id: 'btn2', type: 'radio', name: 'food' },
+        btnData: { id: 'btn2', type: 'radio', name: 'food', style: "background-color: orange" },
         data: {
           id: 1,
-          name: 'food2',
+          name: 'Burger',
+          description: "Burger beschreibung",
           extra: false,
           price: 2
         }
@@ -48,26 +50,26 @@ var site: ButtonSite = {
     ],
     [
       {
-        btnData: { id: 'btn3', type: 'checkbox' },
+        btnData: { id: 'btn3', type: 'checkbox', style: "background-color: lightblue" },
         data: {
           id: 2,
-          name: 'ex1',
+          name: 'Zwiebeln',
           extra: true,
           price: 0.1
         }
       },
       {
-        btnData: { id: 'btn4', type: 'checkbox' },
+        btnData: { id: 'btn4', type: 'checkbox', style: "background-color: lightblue" },
         data: {
           id: 3,
-          name: 'ex2',
+          name: 'Käse',
           extra: true,
           price: 0.2
         }
       },
       {
-        btnData: { id: 'btn5', type: 'addButton' },
-        data: 'add'
+        btnData: { id: 'btn5', type: 'addButton', style: "background-color: lightgrey" },
+        data: 'Anfügen'
       }
     ],
     [
@@ -79,33 +81,33 @@ var site: ButtonSite = {
   ]
 }
 var site2: ButtonSite = {
-  id: 'site2',
+  id: 'Seite 2',
   buttons: [
     [
       {
-        btnData: { id: 's1_2', type: 'site' },
-        data: 'site1'
+        btnData: { id: 's1_2', type: 'site', style: "background-color: lightgreen" },
+        data: 'Seite 1'
       },
       {
-        btnData: { id: 's2_2', type: 'site' },
-        data: 'site2'
+        btnData: { id: 's2_2', type: 'site', style: "background-color: lightgreen" },
+        data: 'Seite 2'
       }
     ],
     [
       {
-        btnData: { id: 'btn1_2', type: 'checkbox' },
+        btnData: { id: 'btn1_2', type: 'checkbox', style: "background-color: lightblue" },
         data: {
           id: 0,
-          name: 'ex1_2',
+          name: 'Chili',
           extra: true,
           price: 1
         }
       },
       {
-        btnData: { id: 'btn2_2', type: 'checkbox' },
+        btnData: { id: 'btn2_2', type: 'checkbox', style: "background-color: lightblue" },
         data: {
           id: 1,
-          name: 'ex2_2',
+          name: 'Salat',
           extra: true,
           price: 2
         }
@@ -113,7 +115,7 @@ var site2: ButtonSite = {
     ]
   ]
 }
-var btns: Ref<ButtonGrid> = ref({ startSite: 'site1', sites: [site, site2] })
+var btns: Ref<ButtonGrid> = ref({ startSite: 'Seite 1', sites: [site, site2] })
 
 const totalModal = ref(false)
 const stornoModal = ref(false)
@@ -186,7 +188,7 @@ function clearOrder() {
   <div class="col-1 col-middle"></div>
   <div class="col col-right">
     <div class="row" style="">
-      <div class="col">
+      <div class="col lastSchlange">
         <h2>Auslastung Schlange</h2>
       </div>
     </div>
@@ -254,15 +256,20 @@ function clearOrder() {
 </template>
 
 <style scoped>
+
+.lastSchlange{
+  height: 10vh;
+  margin-top: 1vh;
+}
 .essenList {
-  height: 25rem;
+  height: 53vh;
   overflow-y: scroll;
-  margin-top: 1em;
+  margin-top: 1vh;
 }
 
 .col-radio {
-  height: 4em;
-  margin: 1em 1em;
+  height: 5vh;
+  margin: 1vh 1vh;
   padding: 0em;
 }
 
