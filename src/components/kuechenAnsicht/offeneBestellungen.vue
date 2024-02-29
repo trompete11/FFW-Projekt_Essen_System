@@ -25,11 +25,9 @@ const props = defineProps<{
 }>()
 
 const orderStore = useOrderStore()
-//const orders = ref(orderStore.getOrders)
 const filteredOrders = ref(orderStore.getFilteredOrders)
 
 watchEffect(() => {
-  //orders.value = orderStore.getOrders;
   filteredOrders.value = orderStore.getFilteredOrders
 })
 </script>
@@ -38,10 +36,5 @@ watchEffect(() => {
   #order-container {
     max-height: 800px;
     overflow-y: auto;
-  }
-
-  #combo {
-    margin-top: 30px;
-    margin-bottom: 0px;
   }
 </style>

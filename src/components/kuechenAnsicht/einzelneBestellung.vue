@@ -1,9 +1,8 @@
 <template>
   <div class="order" :style="{ backgroundColor: backgroundColor }">
     <div class="checkbox">
-      <input type="checkbox" v-model="isChecked" @change="checkOrder" />
+      <input v-if="!orders[orderId-1].time_done" type="checkbox" v-model="isChecked" @change="setDone(props.orderId-1, isChecked)" />
     </div>
-
     <div class="order-details">
       <span>Nr. #{{ orderId }}</span>
       <div v-for="item in ords" :key="ords.indexOf(item)">
@@ -20,9 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { type Order, type OrderItem } from '@/assets/interfaces'
+import { type OrderItem } from '@/assets/interfaces'
 import { useOrderStore } from '@/stores/orderStore'
-import { ref, defineProps, onMounted, watchEffect, watch } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
 // define property for input of orders
 const props = defineProps<{
@@ -33,7 +32,6 @@ const props = defineProps<{
 const orderStore = useOrderStore()
 const orders = ref(orderStore.getOrders)
 const setDone = orderStore.doneOrder
-const order = orders.value[props.orderId]
 
 // variables for timer
 const seconds = ref(0)
