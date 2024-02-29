@@ -1,12 +1,14 @@
+<!-- Author: Emre Burak Koc -->
+<!-- Component for listing and filtering single orders -->
 <template>
   <div id="order-container">
-    <div v-if="selection == 'open'">
+    <div v-if="selection == 'open'"> <!-- open orders -->
       <h2>Offene Bestellungen: {{ orderStore.getFilteredOrders.open.length }}</h2>
-      <div v-for="order in filteredOrders.open" :key="order.id">
+      <div v-for="order in filteredOrders.open" :key="order.id"> <!-- iterating over filtered orders -->
         <EinzelBestellung :orderId="order.id" :ords="order.order_items" />
       </div>
     </div>
-    <div v-else>
+    <div v-else> <!-- displaying done orders -->
       <h2>Fertige Bestellungen: {{ orderStore.getFilteredOrders.done.length }}</h2>
       <div v-for="order in filteredOrders.done" :key="order.id">
         <EinzelBestellung :order-id="order.id" :ords="order.order_items" />
