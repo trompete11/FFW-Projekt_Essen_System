@@ -18,15 +18,18 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
 import { useOrderStore } from '@/stores/orderStore'
-import EinzelBestellung from '@/components/kuechenAnsicht/einzelneBestellung.vue'
+import EinzelBestellung from '@/components/kuechenAnsicht/einzelneBestellung.vue' // single order component for all orders
 
+  // defining properties, selection for filtering orders
 const props = defineProps<{
   selection: string
 }>()
 
+// getting state of filtered orders
 const orderStore = useOrderStore()
 const filteredOrders = ref(orderStore.getFilteredOrders)
 
+// updating filteredOrders  
 watchEffect(() => {
   filteredOrders.value = orderStore.getFilteredOrders
 })
