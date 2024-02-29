@@ -10,7 +10,7 @@ export const useOrderStore = defineStore('orderStore', () => {
   const getOrders = computed(() => orders.value)
   orders.value.filter
   //const getFilter = computed(() => filter.value)
-  //const getFilterdOrders = computed((filter: String) => orders.value)
+  const getFilterdOrders = computed((filter: String) => orders.value)
   const getFilteredOrders = computed(() => { 
     return {
       open: orders.value.filter((order) => order.time_done == null),
