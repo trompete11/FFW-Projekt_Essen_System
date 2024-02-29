@@ -1,21 +1,30 @@
 <script setup lang="ts">
-  import type { ButtonData } from '@/assets/bestellInterfaces';
+import type { ButtonData } from '@/assets/bestellInterfaces'
 
-  var props = defineProps<{
-    btn_data: ButtonData
-  }>();
-  
-  if(props.btn_data.type !== "button" && props.btn_data.type !== "checkbox" && props.btn_data.type !== "radio" && props.btn_data.type !== "addButton" && props.btn_data.type !== "site"){
-    throw new Error("Button type " + props.btn_data.type + " not supported. Only button, addButton, site, radio or checkbox.");
-  }
+var props = defineProps<{
+  btn_data: ButtonData
+}>()
 
-  var type = props.btn_data.type;
-  if(props.btn_data.type === "addButton" || props.btn_data.type === "site"){
-    type = "button"
-  }
+if (
+  props.btn_data.type !== 'button' &&
+  props.btn_data.type !== 'checkbox' &&
+  props.btn_data.type !== 'radio' &&
+  props.btn_data.type !== 'addButton' &&
+  props.btn_data.type !== 'site'
+) {
+  throw new Error(
+    'Button type ' +
+      props.btn_data.type +
+      ' not supported. Only button, addButton, site, radio or checkbox.'
+  )
+}
 
-  defineEmits(['click']);
+var type = props.btn_data.type
+if (props.btn_data.type === 'addButton' || props.btn_data.type === 'site') {
+  type = 'button'
+}
 
+defineEmits(['click'])
 </script>
 
 <template>
@@ -27,18 +36,13 @@
     @click="$emit('click')"
     :v-model="props.btn_data.ticked"
   />
-  <label
-    :for="props.btn_data.id"
-    class="bestell-button-label"
-    :style="props.btn_data.style"
-  >
+  <label :for="props.btn_data.id" class="bestell-button-label" :style="props.btn_data.style">
     <b><slot></slot></b>
     <div class="tick_container tick"><i class="fa fa-check"></i></div>
   </label>
 </template>
 <script lang="ts">
-export default {
-} 
+export default {}
 </script>
 <style scoped>
 .bestell-button-label {

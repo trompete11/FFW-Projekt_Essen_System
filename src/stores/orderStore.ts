@@ -9,32 +9,38 @@ export const useOrderStore = defineStore('orderStore', () => {
   const getOrders = computed(() => orders.value)
   const getFilterdOrders = computed((filter: String) => orders.value) // @todo: implementation
 
-  function addOrder(order_items:OrderItem[]) {
+  function addOrder(order_items: OrderItem[], price: number = 0) {
     id.value++
-    orders.value.push({id: id.value, time_in: Date(), time_done: null, time_gone: null, order_items})
-    return id;
+    orders.value.push({
+      id: id.value,
+      time_in: Date(),
+      time_done: null,
+      time_gone: null,
+      order_items,
+      price_sum: price
+    })
+    return id
   }
 
-  function doneOrder(orderId:number, done:boolean = true){
-    if(done){
+  function doneOrder(orderId: number, done: boolean = true) {
+    if (done) {
       orders.value[orderId].time_done = Date()
-    }
-    else{
+    } else {
       orders.value[orderId].time_done = null
     }
   }
 
-  function goneOrder(orderId:number, gone:boolean = true){
-    if(gone){
+  function goneOrder(orderId: number, gone: boolean = true) {
+    if (gone) {
       orders.value[orderId].time_gone = Date()
-    }
-    else{
+    } else {
       orders.value[orderId].time_gone = null
     }
   }
 
-  function stornoOrder(orderId:number){
-    orders.value.splice(orderId, 1)
+  function stornoOrder(orderId: number) {
+    const orderIndex = orders.value.findIndex((element) => (element.id === orderId))
+    orders.value.splice(orderIndex, 1)
   }
 
   return { id, orders, getOrders, getFilterdOrders, addOrder, doneOrder, goneOrder, stornoOrder }

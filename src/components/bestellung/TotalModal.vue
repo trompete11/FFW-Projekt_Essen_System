@@ -1,32 +1,32 @@
 <script setup lang="ts">
-  import type { ButtonData } from '@/assets/bestellInterfaces';
-  import type { OrderItem } from '@/assets/interfaces';
-  import Modal from '@/components/bestellung/BaseModal.vue'
-  import Button from '@/components/bestellung/ButtonBase.vue'
-  import EssenList from '@/components/bestellung/EssenList.vue'
+import type { ButtonData } from '@/assets/bestellInterfaces'
+import type { OrderItem } from '@/assets/interfaces'
+import Modal from '@/components/bestellung/BaseModal.vue'
+import Button from '@/components/bestellung/ButtonBase.vue'
+import EssenList from '@/components/bestellung/EssenList.vue'
 
-  defineProps<{
-    order: OrderItem[]
-    price: number
-  }>()
+defineProps<{
+  order: OrderItem[]
+  price: number
+}>()
 
-  var btns: ButtonData[] = [
-        {
-          id: 'stbtn0',
-          type: 'button',
-          style: 'background-color:lightgray'
-        },
-        {
-          id: 'stbtn1',
-          type: 'button',
-          style: 'background-color:#c90019'
-        },
-        {
-          id: 'stbtn2',
-          type: 'button',
-          style: 'background-color:#e6eec9'
-        }
-      ]
+var btns: ButtonData[] = [
+  {
+    id: 'stbtn0',
+    type: 'button',
+    style: 'background-color:lightgray'
+  },
+  {
+    id: 'stbtn1',
+    type: 'button',
+    style: 'background-color:#c90019'
+  },
+  {
+    id: 'stbtn2',
+    type: 'button',
+    style: 'background-color:#e6eec9'
+  }
+]
 </script>
 
 <template>
@@ -41,9 +41,7 @@
         <div class="row">
           <div class="col col-radio" style="background-color: aqua">
             <Button @click="$emit('price')" :btn_data="btns[2]">{{
-              Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(
-                price
-              )
+              Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(price)
             }}</Button>
           </div>
           <div class="col col-radio" style="background-color: aqua">
@@ -71,12 +69,6 @@ export default {
 </script>
 
 <style scoped>
-h2 {
-}
-
-.modals {
-}
-
 .col-radio {
   height: 4em;
   margin: 1%;

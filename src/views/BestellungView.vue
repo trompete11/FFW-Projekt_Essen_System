@@ -1,178 +1,182 @@
 <script lang="ts" setup>
-  import BestellButtons from '@/components/bestellung/BestellButtons.vue'
-  import Button from '@/components/bestellung/ButtonBase.vue'
-  import EssenList from '@/components/bestellung/EssenList.vue'
-  import TotalModal from '@/components/bestellung/TotalModal.vue'
-  import type { OrderItem } from '@/assets/interfaces'
-  import { useOrderStore } from '@/stores/orderStore'
-  import type { ButtonGrid, ButtonSite } from '@/assets/bestellInterfaces'
-  import { ref, type Ref } from 'vue'
-  import StornoModal from '@/components/bestellung/StornoModal.vue'
+import BestellButtons from '@/components/bestellung/BestellButtons.vue'
+import Button from '@/components/bestellung/ButtonBase.vue'
+import EssenList from '@/components/bestellung/EssenList.vue'
+import TotalModal from '@/components/bestellung/TotalModal.vue'
+import IdModal from '@/components/bestellung/IdModal.vue'
+import type { OrderItem } from '@/assets/interfaces'
+import { useOrderStore } from '@/stores/orderStore'
+import type { ButtonGrid, ButtonSite } from '@/assets/bestellInterfaces'
+import { ref, type Ref } from 'vue'
+import StornoModal from '@/components/bestellung/StornoModal.vue'
 
-  const order:Ref<OrderItem[] | []> = ref([]);
-  const price_sum: Ref<number> = ref(0);
+const order: Ref<OrderItem[] | []> = ref([])
+const price_sum: Ref<number> = ref(0)
 
-  var site: ButtonSite = {
-    id: "site1", 
-    buttons: [
-      [
-        {
-          btnData: {id:"s1", type: "site"}, 
-          data: "site1"
-        },
-        {
-          btnData: {id:"s2", type: "site"}, 
-          data: "site2"
+var site: ButtonSite = {
+  id: 'site1',
+  buttons: [
+    [
+      {
+        btnData: { id: 's1', type: 'site' },
+        data: 'site1'
+      },
+      {
+        btnData: { id: 's2', type: 'site' },
+        data: 'site2'
+      }
+    ],
+    [
+      {
+        btnData: { id: 'btn1', type: 'radio', name: 'food' },
+        data: {
+          id: 0,
+          name: 'food1',
+          extra: false,
+          price: 1
         }
-      ],
-      [
-        {
-          btnData: {id:"btn1", type: "radio", name: "food"}, 
-          data: {
-            id:0,
-            name:"food1",
-            extra: false,
-            price: 1
-          }
-        },
-        {
-          btnData: {id:"btn2", type: "radio", name: "food"}, 
-          data: {
-            id:1,
-            name:"food2",
-            extra: false,
-            price: 2
-          }
+      },
+      {
+        btnData: { id: 'btn2', type: 'radio', name: 'food' },
+        data: {
+          id: 1,
+          name: 'food2',
+          extra: false,
+          price: 2
         }
-      ],
-      [
-        {
-          btnData: {id:"btn3", type: "checkbox"}, 
-          data: {
-            id:2,
-            name:"ex1",
-            extra: true,
-            price: 0.1
-          }
-        },
-        {
-          btnData: {id:"btn4", type: "checkbox"}, 
-          data: {
-            id:3,
-            name:"ex2",
-            extra: true,
-            price: 0.2
-          }
-        },
-        {
-          btnData: {id:"btn5", type: "addButton"}, 
-          data: "add"
+      }
+    ],
+    [
+      {
+        btnData: { id: 'btn3', type: 'checkbox' },
+        data: {
+          id: 2,
+          name: 'ex1',
+          extra: true,
+          price: 0.1
         }
-      ],
-      [
-        {
-          btnData: {id:"btn6", type: "text"}, 
-          data: "text eingeben"
+      },
+      {
+        btnData: { id: 'btn4', type: 'checkbox' },
+        data: {
+          id: 3,
+          name: 'ex2',
+          extra: true,
+          price: 0.2
         }
-      ]
+      },
+      {
+        btnData: { id: 'btn5', type: 'addButton' },
+        data: 'add'
+      }
+    ],
+    [
+      {
+        btnData: { id: 'btn6', type: 'text' },
+        data: 'text eingeben'
+      }
     ]
-  }
-  var site2: ButtonSite = {
-    id: "site2", 
-    buttons: [
-      [
-        {
-          btnData: {id:"s1_2", type: "site"}, 
-          data: "site1"
-        },
-        {
-          btnData: {id:"s2_2", type: "site"}, 
-          data: "site2"
+  ]
+}
+var site2: ButtonSite = {
+  id: 'site2',
+  buttons: [
+    [
+      {
+        btnData: { id: 's1_2', type: 'site' },
+        data: 'site1'
+      },
+      {
+        btnData: { id: 's2_2', type: 'site' },
+        data: 'site2'
+      }
+    ],
+    [
+      {
+        btnData: { id: 'btn1_2', type: 'checkbox' },
+        data: {
+          id: 0,
+          name: 'ex1_2',
+          extra: true,
+          price: 1
         }
-      ],
-      [
-        {
-          btnData: {id:"btn1_2", type: "checkbox"}, 
-          data: {
-            id:0,
-            name:"ex1_2",
-            extra: true,
-            price: 1
-          }
-        },
-        {
-          btnData: {id:"btn2_2", type: "checkbox"}, 
-          data: {
-            id:1,
-            name:"ex2_2",
-            extra: true,
-            price: 2
-          }
+      },
+      {
+        btnData: { id: 'btn2_2', type: 'checkbox' },
+        data: {
+          id: 1,
+          name: 'ex2_2',
+          extra: true,
+          price: 2
         }
-      ]
+      }
     ]
+  ]
+}
+var btns: Ref<ButtonGrid> = ref({ startSite: 'site1', sites: [site, site2] })
+
+const totalModal = ref(false)
+const stornoModal = ref(false)
+const idModal = ref(false)
+
+const newId = ref(-1)
+
+const orderStore = useOrderStore()
+
+function beilagen_sort(a: any, b: any) {
+  if (a.id < b.id) {
+    return -1
+  } else if (a.id > b.id) {
+    return 1
   }
-  var btns: Ref<ButtonGrid> = ref({startSite: "site1", sites:[site,site2]});
-  
-  const totalModal = ref(false);
-  const stornoModal = ref(false);
 
-  const orderStore = useOrderStore();
+  return 0
+}
 
-  function beilagen_sort(a: any, b: any) {
-    if (a.id < b.id) {
-      return -1
-    } else if (a.id > b.id) {
-      return 1
-    }
+function addItemClick(item: OrderItem) {
+  console.log('addItem: ' + JSON.stringify(item))
+  if (item.item === null || item.item === undefined) {
+    return
+  }
+  item.extras.sort(beilagen_sort) // sort um vergleich der beilagen unabhängig von der reihenfolge zu machen
 
-    return 0
+  //finde Index von Element mit gleichem essen und Gleichen beilagen
+  let index = order.value.findIndex(
+    (element: OrderItem) =>
+      element.item.id === item.item.id &&
+      element.comment === item.comment &&
+      JSON.stringify(item.extras) === JSON.stringify(element.extras)
+  )
+
+  if (index !== -1) {
+    order.value[index].count++
+    console.log('plus')
+  } else {
+    item.price_sum = item.item.price
+    item.extras.forEach((element: any) => {
+      item.price_sum += element.price
+    })
+    console.log('push')
+    order.value.push(JSON.parse(JSON.stringify(item)))
   }
 
-  function addItemClick(item:OrderItem){
-    console.log("addItem: " + JSON.stringify(item))
-      if(item.item === null || item.item === undefined){
-        return
-      }
-      item.extras.sort(beilagen_sort) // sort um vergleich der beilagen unabhängig von der reihenfolge zu machen
-        
-      //finde Index von Element mit gleichem essen und Gleichen beilagen
-      let index = order.value.findIndex(
-        (element: OrderItem) =>
-          element.item.id === item.item.id &&
-          element.comment === item.comment &&
-          JSON.stringify(item.extras) === JSON.stringify(element.extras)
-      ) 
+  price_sum.value += item.price_sum
+}
 
-      if (index !== -1) {
-        order.value[index].count++
-        console.log("plus")
-      } 
-      else {
-        item.price_sum = item.item.price
-        item.extras.forEach((element: any) => {
-          item.price_sum += element.price
-        })
-        console.log("push")
-        order.value.push(JSON.parse(JSON.stringify(item)))
-      }
+function newOrder() {
+  if (order.value.length <= 0) {
+    return
+  }
+  newId.value = orderStore.addOrder(order.value, price_sum.value).value
+  clearOrder()
+  idModal.value = true
+}
 
-      price_sum.value += item.price_sum
-    }
-
-    function newOrder() {
-      if(order.value.length <= 0){
-        return
-      }
-      orderStore.addOrder(order.value)
-      clearOrder()
-    }
-
-    function clearOrder(){
-      order.value = []
-      price_sum.value = 0
-      //location.reload()
-    }
+function clearOrder() {
+  order.value = []
+  price_sum.value = 0
+  //location.reload()
+}
 </script>
 
 <template>
@@ -184,7 +188,6 @@
     <div class="row" style="">
       <div class="col">
         <h2>Auslastung Schlange</h2>
-        
       </div>
     </div>
     <div class="row">
@@ -202,7 +205,8 @@
             style: 'background-color:#c90019'
           }"
           @click="totalModal = true"
-          >Aussen Total</Button>
+          >Aussen Total</Button
+        >
       </div>
       <div class="col col-radio">
         <Button
@@ -212,9 +216,7 @@
             style: 'background-color:#e6eec9'
           }"
           >{{
-            Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(
-              price_sum
-            )
+            Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(price_sum)
           }}</Button
         >
       </div>
@@ -226,7 +228,8 @@
             style: 'background-color:#c90019'
           }"
           @click="stornoModal = true"
-          >Storno</Button>
+          >Storno</Button
+        >
       </div>
     </div>
   </div>
@@ -238,11 +241,16 @@
     v-if="totalModal"
   />
   <StornoModal
-    @close="stornoModal = false" 
-    @clear="clearOrder()" 
-    @storno="(id:number) => {orderStore.stornoOrder(id)}" 
+    @close="stornoModal = false"
+    @clear="clearOrder()"
+    @storno="
+      (id: number) => {
+        orderStore.stornoOrder(id)
+      }
+    "
     v-if="stornoModal"
   />
+  <IdModal v-if="idModal" @close="idModal = false" :id="newId"/>
 </template>
 
 <style scoped>

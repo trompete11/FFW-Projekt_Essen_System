@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import type { OrderItem } from '@/assets/interfaces';
-import { onBeforeUpdate } from 'vue';
+import type { OrderItem } from '@/assets/interfaces'
+import { onBeforeUpdate } from 'vue'
 
 var props = defineProps<{
-  order:OrderItem[] | []
+  order: OrderItem[] | []
 }>()
 
-onBeforeUpdate(()=>{
-  console.log("essenlist");
+onBeforeUpdate(() => {
+  console.log('essenlist')
 })
 </script>
 
@@ -15,9 +15,7 @@ onBeforeUpdate(()=>{
   <div class="row" v-for="(item, index) in props.order" v-bind:key="index">
     <div class="col">
       {{ item.count }}x {{ item.item.name }} /
-      <span v-for="extra in item.extras" v-bind:key="extra.id"
-        >{{ extra.name }},
-      </span>
+      <span v-for="extra in item.extras" v-bind:key="extra.id">{{ extra.name }}, </span>
       <span></span><br />
       <span v-if="item.comment !== ''">{{ item.comment }}</span>
     </div>
